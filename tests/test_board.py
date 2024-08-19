@@ -30,5 +30,28 @@ class TestBoard(unittest.TestCase):
         with self.assertRaises(IndexError):
             board.get_piece(0, 8)
 
+    def test_move_piece(self):
+        board = Board()
+        
+        board.move_piece(0, 0, 0, 4)
+        self.assertIsNone(board.get_piece(0, 0))
+        self.assertIsInstance(board.get_piece(0, 4), Rook)
+        self.assertEqual(board.get_piece(0, 4).get_color(), "BLACK")
+        
+        board.move_piece(7, 7, 5, 7)
+        self.assertIsNone(board.get_piece(7, 7))
+        self.assertIsInstance(board.get_piece(5, 7), Rook)
+        self.assertEqual(board.get_piece(5, 7).get_color(), "WHITE")
+        
+    def test_move_piece_out_of_bounds(self):
+        board = Board()
+
+        with self.assertRaises(IndexError):
+            board.move_piece(0, 0, 8, 8)
+
+
+
+
+
 if __name__ == '__main__':
     unittest.main()
