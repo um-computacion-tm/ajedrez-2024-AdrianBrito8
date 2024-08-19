@@ -26,3 +26,10 @@ class Board:
             self.__positions__[end_row][end_col] = piece
         else:
             raise IndexError("Move out of board range.")
+        
+    def is_empty_position(self, row, col):
+        """Check if a position on the board is empty."""
+        if 0 <= row < 8 and 0 <= col < 8:
+            return self.__positions__[row][col] is None
+        else:
+            raise IndexError("Position out of board range.")

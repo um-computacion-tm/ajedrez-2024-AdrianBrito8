@@ -49,7 +49,20 @@ class TestBoard(unittest.TestCase):
         with self.assertRaises(IndexError):
             board.move_piece(0, 0, 8, 8)
 
+    def test_is_empty_position(self):
+        board = Board()
 
+        self.assertTrue(board.is_empty_position(3, 3))
+        self.assertTrue(board.is_empty_position(4, 4))
+
+        self.assertFalse(board.is_empty_position(0, 0))
+        self.assertFalse(board.is_empty_position(7, 7))
+
+        with self.assertRaises(IndexError):
+            board.is_empty_position(-1, 0)
+
+        with self.assertRaises(IndexError):
+            board.is_empty_position(8, 8)
 
 
 

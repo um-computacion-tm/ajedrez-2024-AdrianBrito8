@@ -26,3 +26,11 @@
  ## Tests
  - Tests the movement of a piece on the board and verifies that it was performed correctly.
  - Ensures that an `IndexError` is raised when trying to move a piece outside of the board's range.
+
+##[2024-08-17]
+
+## Improve
+- Added `is_empty_position` methods to ensure operations are within board limits.
+
+## Tests
+- Tests the `is_empty_position` method to check for empty and occupied positions and verifies that an `IndexError` is raised for out-of-bounds positions.
