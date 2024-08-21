@@ -34,3 +34,11 @@
 
 ## Tests
 - Tests the `is_empty_position` method to check for empty and occupied positions and verifies that an `IndexError` is raised for out-of-bounds positions.
+
+##[2024-08-20]
+
+## Adedd
+- Adedd valid_moves in rook
+
+## Tests
+- Tests the valid_moves in rook method in differents positions
