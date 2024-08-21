@@ -42,3 +42,10 @@
 
 ## Tests
 - Tests the valid_moves in rook method in differents positions
+
+##[2024-08-21]
+## Adedd 
+- A dedd is_opponent_piece in piece
+
+## Tests
+- Test test_is_opponent_piece_ method to chek if the other piece is from the oponnent
