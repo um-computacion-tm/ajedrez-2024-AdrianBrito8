@@ -23,5 +23,16 @@ class TestPiece(unittest.TestCase):
         self.assertFalse(white_piece.is_opponent_piece(Piece("WHITE")))
         self.assertFalse(black_piece.is_opponent_piece(Piece("BLACK")))
 
+    def test_move_to(self):
+        piece = Piece("WHITE")
+        
+        self.assertIsNone(piece.get_position())
+        
+        piece.move_to((3, 3))
+        self.assertEqual(piece.get_position(), (3, 3))
+        
+        piece.move_to((5, 5))
+        self.assertEqual(piece.get_position(), (5, 5))
+
 if __name__ == '__main__':
     unittest.main()

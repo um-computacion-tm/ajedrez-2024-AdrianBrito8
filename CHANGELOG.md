@@ -49,3 +49,15 @@
 
 ## Tests
 - Test test_is_opponent_piece_ method to chek if the other piece is from the oponnent
+
+##[2024-08-22]
+## Adedd
+-Piece Class:
+    Added move_to(new_position) method to update the internal position of a piece.
+    Added set_position(position) and get_position() methods to manage the position attribute of a piece.
+    Updated Piece class to include a __position__ attribute to store the piece's current position.
+
+## Tests
+- test_piece.py:
+    Added tests for the new move_to() method to ensure that the piece's position is updated correctly.
+    Added tests for set_position(position) and get_position() methods.

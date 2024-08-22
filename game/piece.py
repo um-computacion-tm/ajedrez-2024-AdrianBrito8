@@ -1,6 +1,7 @@
 class Piece:
     def __init__(self, color):
         self.__color__ = color
+        self.__position__ = None
 
     def get_color(self):
         return self.__color__
@@ -11,3 +12,12 @@ class Piece:
     def is_opponent_piece(self, other_piece):
         """Returns True if the other piece is an opponent piece, otherwise False."""
         return self.__color__ != other_piece.get_color()
+    
+    def set_position(self, position):
+        self.__position__ = position
+
+    def get_position(self):
+        return self.__position__
+    
+    def move_to(self, new_position):
+        self.__position__ = new_position
