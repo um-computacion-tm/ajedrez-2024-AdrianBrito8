@@ -61,3 +61,11 @@
 - test_piece.py:
     Added tests for the new move_to() method to ensure that the piece's position is updated correctly.
     Added tests for set_position(position) and get_position() methods.
+
+##[2024-08-22]
+## Adedd
+- Implemented capture method in the Piece class to handle the capturing of pieces.
+- Added is_captured method to check if a piece has been captured.
+
+## Tests
+- Created a new test case in test_piece.py to verify the correct functionality of the capture method.

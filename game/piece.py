@@ -2,6 +2,7 @@ class Piece:
     def __init__(self, color):
         self.__color__ = color
         self.__position__ = None
+        self.__captured__ = False
 
     def get_color(self):
         return self.__color__
@@ -21,3 +22,12 @@ class Piece:
     
     def move_to(self, new_position):
         self.__position__ = new_position
+
+    def is_captured(self):
+        return self.__captured__
+
+    def capture(self):
+        self.__captured__ = True
+
+    def __str__(self):
+        return f"{self.__class__.__name__}({self.__color__})"

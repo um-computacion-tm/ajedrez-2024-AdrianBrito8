@@ -34,5 +34,14 @@ class TestPiece(unittest.TestCase):
         piece.move_to((5, 5))
         self.assertEqual(piece.get_position(), (5, 5))
 
+    def test_capture_piece(self):
+        piece = Piece("WHITE")
+
+        self.assertFalse(piece.is_captured())     
+        piece.capture()
+        
+        self.assertTrue(piece.is_captured())
+
+
 if __name__ == '__main__':
     unittest.main()
