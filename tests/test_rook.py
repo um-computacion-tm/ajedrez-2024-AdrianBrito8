@@ -29,5 +29,20 @@ class TestRook(unittest.TestCase):
         expected_moves = [(3, i) for i in range(8) if i != 3] + [(i, 3) for i in range(8) if i != 3]
         self.assertCountEqual(moves, expected_moves)
 
+    def test_rook_valid_moves_edge_case(self):
+        rook = Rook("WHITE")
+        
+        moves = rook.valid_moves((7, 7))
+        expected_moves = [(7, i) for i in range(7)] + [(i, 7) for i in range(7)]
+        self.assertCountEqual(moves, expected_moves)
+
+    def test_rook_valid_moves_central_position(self):
+        rook = Rook("WHITE")
+        
+        # Position at (4, 4)
+        moves = rook.valid_moves((4, 4))
+        expected_moves = [(4, i) for i in range(8) if i != 4] + [(i, 4) for i in range(8) if i != 4]
+        self.assertCountEqual(moves, expected_moves)
+
 if __name__ == '__main__':
     unittest.main()

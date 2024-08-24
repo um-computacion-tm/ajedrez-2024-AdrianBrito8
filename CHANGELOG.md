@@ -69,3 +69,8 @@
 
 ## Tests
 - Created a new test case in test_piece.py to verify the correct functionality of the capture method.
+
+##[2024-08-24]
+## Tests
+- Validating the list of valid moves from edge positions on the board.
+- Validating the list of valid moves from a central position on the board.
