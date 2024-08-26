@@ -74,3 +74,9 @@
 ## Tests
 - Validating the list of valid moves from edge positions on the board.
 - Validating the list of valid moves from a central position on the board.
+
+##[2024-08-25]
+
+### Added
+- Added a `can_attack` method to the `Rook` class to check if the rook can attack a piece at a given position.
+- Created unit tests for the `can_attack` method in `test_rook.py`.

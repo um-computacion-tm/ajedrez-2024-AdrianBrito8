@@ -21,5 +21,9 @@ class Rook(Piece):
         for r in range(8):
             if r != row:
                 moves.append((r, col))
-        
         return moves
+    
+    def can_attack(self, current_position, other_piece_position):
+        row, col = current_position
+        valid_moves = self.valid_moves(current_position)
+        return other_piece_position in valid_moves

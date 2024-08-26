@@ -44,5 +44,15 @@ class TestRook(unittest.TestCase):
         expected_moves = [(4, i) for i in range(8) if i != 4] + [(i, 4) for i in range(8) if i != 4]
         self.assertCountEqual(moves, expected_moves)
 
+    def test_rook_can_attack(self):
+        rook = Rook("BLACK")
+
+        # Rook at (0, 0)
+        self.assertTrue(rook.can_attack((0, 0), (0, 7)))  # Same row
+        self.assertTrue(rook.can_attack((0, 0), (7, 0)))  # Same column
+        self.assertFalse(rook.can_attack((0, 0), (7, 7)))  # Not in the same row/column
+
+
+
 if __name__ == '__main__':
     unittest.main()
