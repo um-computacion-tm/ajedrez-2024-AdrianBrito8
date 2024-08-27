@@ -80,3 +80,15 @@
 ### Added
 - Added a `can_attack` method to the `Rook` class to check if the rook can attack a piece at a given position.
 - Created unit tests for the `can_attack` method in `test_rook.py`.
+
+##[2024-08-26]
+
+ ## Added:
+ - Pawn: 
+    -valid_moves: Returns a list of valid moves for the pawn based on its current position and color.
+    -move: Updates the pawn's status to indicate that it has moved, which affects its ability to make a double move on its first move.
+
+ ## Tests
+ - Tests Pawn:
+    -test_pawn_valid_moves: Verifies the valid moves for a pawn from its initial position.
+    
