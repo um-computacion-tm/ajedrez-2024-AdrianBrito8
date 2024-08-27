@@ -33,3 +33,10 @@ class Board:
             return self.__positions__[row][col] is None
         else:
             raise IndexError("Position out of board range.")
+
+    def place_piece(self, piece, row, col):
+        """Coloca una pieza en una posición específica en el tablero."""
+        if 0 <= row < 8 and 0 <= col < 8:
+            self.__positions__[row][col] = piece
+        else:
+            raise IndexError("Position out of board range.")

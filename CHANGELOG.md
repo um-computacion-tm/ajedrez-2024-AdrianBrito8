@@ -91,4 +91,15 @@
  ## Tests
  - Tests Pawn:
     -test_pawn_valid_moves: Verifies the valid moves for a pawn from its initial position.
-    
+
+##[2024-08-27]
+
+## Added:
+- Board:
+    -Added the place_piece(piece, row, col) method to allow placing a piece at a specific position on the board. 
+
+- Pawn:
+    -Updated valid_moves method
+
+## Tests
+- Added a test to verify that a pawn can capture enemy pieces with a diagonal move using the valid_moves method.
