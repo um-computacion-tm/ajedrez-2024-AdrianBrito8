@@ -103,3 +103,14 @@
 
 ## Tests
 - Added a test to verify that a pawn can capture enemy pieces with a diagonal move using the valid_moves method.
+
+
+##[2024-08-31]
+
+## Added:
+- `Bishop` Class (`bishop.py`)
+- `valid_moves(position)`: Calculates all valid diagonal moves from a given position.
+  
+## Tests
+- `test_bishop_valid_moves_center`: Tests valid moves from a central position.
+- `test_bishop_valid_moves_corner`: Tests valid moves from a corner position.
