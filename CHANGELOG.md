@@ -114,3 +114,14 @@
 ## Tests
 - `test_bishop_valid_moves_center`: Tests valid moves from a central position.
 - `test_bishop_valid_moves_corner`: Tests valid moves from a corner position.
+
+##[2024-09-01]
+
+## Added:
+- Queen` Class`
+- Implemented the `Queen` piece by combining `Rook` and `Bishop` movements with methods
+
+## Tests
+- `test_queen_valid_moves_center`: Tests valid moves from a central position.
+- `test_queen_valid_moves_corner`: Tests valid moves from a corner position.
+- `test_queen_color`: Tests correct color assignment.
