@@ -64,7 +64,5 @@ class TestBoard(unittest.TestCase):
         with self.assertRaises(IndexError):
             board.is_empty_position(8, 8)
 
-
-
 if __name__ == '__main__':
     unittest.main()

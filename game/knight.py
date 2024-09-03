@@ -1,26 +1,40 @@
-from .piece import Piece
+class Knight:
+    def __init__(self, color, position=None):
+        self.color = color
+        self.position = position
 
-class Knight(Piece):
-    def __init__(self, color):
-        super().__init__(color)
-    
+    def get_color(self):
+        return self.color
+
+    def set_position(self, position):
+        self.position = position
+
     def __str__(self):
-        return f"N({self.get_color()[0]})"
-    
-    def valid_moves(self, position):
-        """Returns a list of valid moves for the Knight from the given position (row, col)."""
+        color_initial = "W" if self.color == "WHITE" else "B"
+        return f"N({color_initial})"
+
+    def valid_moves(self, position, board):
         row, col = position
         moves = []
-        
-        # Possible moves for a knight in terms of (row, col) changes
-        possible_moves = [
-            (2, 1), (2, -1), (-2, 1), (-2, -1),
-            (1, 2), (1, -2), (-1, 2), (-1, -2)
+
+        potential_moves = [
+            (row + 2, col + 1), (row + 2, col - 1),
+            (row - 2, col + 1), (row - 2, col - 1),
+            (row + 1, col + 2), (row + 1, col - 2),
+            (row - 1, col + 2), (row - 1, col - 2),
         ]
-        
-        for move in possible_moves:
-            new_row, new_col = row + move[0], col + move[1]
-            if 0 <= new_row < 8 and 0 <= new_col < 8:
-                moves.append((new_row, new_col))
+
+        for r, c in potential_moves:
+            if 0 <= r < 8 and 0 <= c < 8:
+                # Check if position is empty or has an enemy piece
+                if board.is_empty_position(r, c) or board.get_piece(r, c).get_color() != self.color:
+                    moves.append((r, c))
         
         return moves
+
+    def can_attack(self, target_position, board):
+        # Ensure target_position is valid and contains an enemy piece
+        if target_position in self.valid_moves(self.position, board):
+            target_piece = board.get_piece(*target_position)
+            return target_piece is not None and target_piece.get_color() != self.color
+        return False

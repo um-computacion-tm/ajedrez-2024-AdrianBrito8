@@ -2,16 +2,12 @@ from .rook import Rook
 
 class Board:
     def __init__(self):
-        self.__positions__ = []
-        for _ in range(8):
-            col = []
-            for _ in range(8):
-                col.append(None)
-            self.__positions__.append(col)
-        self.__positions__[0][0] = Rook("BLACK") # Black
-        self.__positions__[0][7] = Rook("BLACK") # Black
-        self.__positions__[7][7] = Rook("WHITE") # White
-        self.__positions__[7][0] = Rook("WHITE") # White
+        # Inicializa el tablero con posiciones vacías
+        self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
+        self.__positions__[0][0] = Rook("BLACK")
+        self.__positions__[0][7] = Rook("BLACK")
+        self.__positions__[7][0] = Rook("WHITE")
+        self.__positions__[7][7] = Rook("WHITE")
 
     def get_piece(self, row, col):
         if 0 <= row < 8 and 0 <= col < 8:
@@ -28,14 +24,12 @@ class Board:
             raise IndexError("Move out of board range.")
         
     def is_empty_position(self, row, col):
-        """Check if a position on the board is empty."""
         if 0 <= row < 8 and 0 <= col < 8:
             return self.__positions__[row][col] is None
         else:
             raise IndexError("Position out of board range.")
-
+    
     def place_piece(self, piece, row, col):
-        """Coloca una pieza en una posición específica en el tablero."""
         if 0 <= row < 8 and 0 <= col < 8:
             self.__positions__[row][col] = piece
         else:

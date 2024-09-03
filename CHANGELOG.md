@@ -135,3 +135,12 @@
 ## Tests:
 - `test_knight_valid_moves` Tests valid moves 
 - `test_knight_color` Tests correct color assigment
+
+##[2024-09-03]
+
+## Imrpoved
+-`Knight` Class: Adjusted the implementations of the __str__ and can_attack methods
+
+## Tests
+-`test_knight_str`: Verified and corrected the string representation of the Knight to return the expected value "N(W)" for a white knight and "N(B)" for a black knight.
+-`test_knight_can_attack`: Corrected the conditions for the can_attack method, ensuring that the knight can only attack enemy pieces and not friendly pieces or empty positions.
