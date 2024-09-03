@@ -125,3 +125,13 @@
 - `test_queen_valid_moves_center`: Tests valid moves from a central position.
 - `test_queen_valid_moves_corner`: Tests valid moves from a corner position.
 - `test_queen_color`: Tests correct color assignment.
+
+##[2024-09-02]
+
+## Added:
+- Class `Knight`
+- Implemented movements methods.
+
+## Tests:
+- `test_knight_valid_moves` Tests valid moves 
+- `test_knight_color` Tests correct color assigment
