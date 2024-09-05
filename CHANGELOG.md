@@ -144,3 +144,14 @@
 ## Tests
 -`test_knight_str`: Verified and corrected the string representation of the Knight to return the expected value "N(W)" for a white knight and "N(B)" for a black knight.
 -`test_knight_can_attack`: Corrected the conditions for the can_attack method, ensuring that the knight can only attack enemy pieces and not friendly pieces or empty positions.
+
+##[2024-09-04]
+
+## Added:
+- Class `King`
+- Implemented `valid_moves` and `can_attack`
+
+## Tests
+- `test_king_color`: Ensures the King has the correct color (Black or White).
+- `test_king_valid_moves`: Verifies the valid moves for the King from a central position on the board.
+- `test_king_can_attack`: Confirms that the King can attack adjacent enemy pieces but not friendly ones.
