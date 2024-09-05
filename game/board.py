@@ -34,3 +34,10 @@ class Board:
             self.__positions__[row][col] = piece
         else:
             raise IndexError("Position out of board range.")
+        
+    def is_enemy_piece(self, piece, position):
+        target_piece = self.get_piece(position)
+        # Devuelve True si hay una pieza enemiga en la posición objetivo
+        return target_piece is not None and target_piece.get_color() != piece.get_color()
+
+

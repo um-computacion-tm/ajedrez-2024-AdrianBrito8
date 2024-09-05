@@ -155,3 +155,12 @@
 - `test_king_color`: Ensures the King has the correct color (Black or White).
 - `test_king_valid_moves`: Verifies the valid moves for the King from a central position on the board.
 - `test_king_can_attack`: Confirms that the King can attack adjacent enemy pieces but not friendly ones.
+
+##[2024-09-05]
+
+## Added:
+- `Board` Class: Implemented is_enemy_piece method to check if a piece at a target position belongs to the opposing player.
+- `Bishop` Class: can_attack method now properly checks if the target position contains an enemy piece using the is_enemy_piece method from the Board class.
+
+## Tests
+- Updated tests for the `Bishop` class to ensure can_attack correctly verifies if a piece can capture an enemy piece.

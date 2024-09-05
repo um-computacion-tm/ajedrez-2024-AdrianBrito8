@@ -1,5 +1,7 @@
 import unittest
 from game.bishop import Bishop
+from game.board import Board
+from game.rook import Rook
 
 class TestBishop(unittest.TestCase):
     def test_bishop_color(self):
@@ -40,6 +42,22 @@ class TestBishop(unittest.TestCase):
         ]
         
         self.assertCountEqual(moves, expected_moves)
+
+    def test_bishop_can_attack(self):
+        board = Board()
+        bishop = Bishop("WHITE", (4, 4))
+        board.place_piece(bishop, 4, 4)
+
+        enemy_piece = Rook("BLACK")
+        board.place_piece(enemy_piece, 6, 6)
+
+        self.assertTrue(bishop.can_attack((6, 6), board))
+
+        friendly_piece = Rook("WHITE")
+        board.place_piece(friendly_piece, 3, 3)
+
+        self.assertFalse(bishop.can_attack((3, 3), board))
+
 
 if __name__ == '__main__':
     unittest.main()
