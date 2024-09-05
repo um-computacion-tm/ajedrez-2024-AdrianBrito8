@@ -159,7 +159,7 @@
 ##[2024-09-05]
 
 ## Added:
-- `Board` Class: Implemented is_enemy_piece method to check if a piece at a target position belongs to the opposing player.
+- `Board` Class: Implemented is_enemy_piece method to check if a piece at a target position belongs to the opposing player. (Second commit fixed)
 - `Bishop` Class: can_attack method now properly checks if the target position contains an enemy piece using the is_enemy_piece method from the Board class.
 
 ## Tests
