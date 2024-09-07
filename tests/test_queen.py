@@ -1,5 +1,7 @@
 import unittest
 from game.queen import Queen
+from game.board import Board
+from game.rook import Rook
 
 class TestQueen(unittest.TestCase):
     def test_queen_color(self):
@@ -48,6 +50,42 @@ class TestQueen(unittest.TestCase):
         ]
         
         self.assertCountEqual(moves, expected_moves)
+
+    def test_queen_can_attack_enemy(self):
+        board = Board()
+        queen = Queen("WHITE")
+
+        # Colocar la reina manualmente en el tablero
+        board.place_piece(queen, 4, 4)
+        queen.position = (4, 4)  # Establecer la posición aquí
+
+        enemy_piece = Rook("BLACK")
+        board.place_piece(enemy_piece, 6, 6)
+
+        self.assertTrue(queen.can_attack((6, 6), board))
+
+    def test_queen_cannot_attack_friendly(self):
+        board = Board()
+        queen = Queen("WHITE")
+
+        board.place_piece(queen, 4, 4)
+        queen.position = (4, 4)
+
+        friendly_piece = Rook("WHITE")
+        board.place_piece(friendly_piece, 6, 6)
+
+        self.assertFalse(queen.can_attack((6, 6), board))
+
+    def test_queen_cannot_attack_empty(self):
+        board = Board()
+        queen = Queen("WHITE")
+
+        board.place_piece(queen, 4, 4)
+        queen.position = (4, 4)
+
+        self.assertFalse(queen.can_attack((5, 5), board))
+
+
 
 if __name__ == '__main__':
         unittest.main()

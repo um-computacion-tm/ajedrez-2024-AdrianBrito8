@@ -17,3 +17,10 @@ class Queen(Piece):
         bishop_moves = self.bishop.valid_moves(position)
         
         return rook_moves + bishop_moves
+
+    def can_attack(self, target_position, board):
+        """
+        Devuelve True si la reina puede atacar la pieza en la posición objetivo.
+        """
+        moves = self.valid_moves(self.position)
+        return target_position in moves and board.is_enemy_piece(self, target_position)

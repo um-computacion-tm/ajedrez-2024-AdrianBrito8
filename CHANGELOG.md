@@ -164,3 +164,11 @@
 
 ## Tests
 - Updated tests for the `Bishop` class to ensure can_attack correctly verifies if a piece can capture an enemy piece.
+
+##[2024-09-06]
+
+## Added:
+- can_attack method for `Queen` class to check if the queen can attack an enemy piece.
+
+## Tests
+-Tests for Queen's can_attack functionality.
