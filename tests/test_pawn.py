@@ -1,7 +1,11 @@
 import unittest
 from game.pawn import Pawn
-from game.board import Board
+from game.queen import Queen
 from game.rook import Rook
+from game.bishop import Bishop
+from game.knight import Knight
+from game.board import Board
+
 
 class TestPawn(unittest.TestCase):
     def test_pawn_valid_moves(self):
@@ -29,8 +33,8 @@ class TestPawn(unittest.TestCase):
         pawn_black.move()
 
         # Posición tras un movimiento inicial
-        board.move_piece(6, 4, 5, 4)  # Mover peón blanco
-        board.move_piece(1, 4, 2, 4)  # Mover peón negro
+        board.move_piece(6, 4, 5, 4)  
+        board.move_piece(1, 4, 2, 4)  
 
         moves = pawn_white.valid_moves((5, 4), board)
         expected_moves = [(4, 4)]  # Solo un movimiento hacia adelante disponible
@@ -55,6 +59,33 @@ class TestPawn(unittest.TestCase):
         moves = pawn_white.valid_moves((6, 4), board)
         expected_moves = [(5, 4), (4, 4), (5, 3), (5, 5)]  # Incluye capturas diagonales
         self.assertCountEqual(moves, expected_moves)
+
+class TestPawnPromotion(unittest.TestCase):
+    def test_pawn_promotion_to_queen(self):
+        pawn = Pawn("WHITE")
+        promoted_piece = pawn.promote("queen")
+        self.assertIsInstance(promoted_piece, Queen)
+
+    def test_pawn_promotion_to_rook(self):
+        pawn = Pawn("WHITE")
+        promoted_piece = pawn.promote("rook")
+        self.assertIsInstance(promoted_piece, Rook)
+
+    def test_pawn_promotion_to_bishop(self):
+        pawn = Pawn("WHITE")
+        promoted_piece = pawn.promote("bishop")
+        self.assertIsInstance(promoted_piece, Bishop)
+
+    def test_pawn_promotion_to_knight(self):
+        pawn = Pawn("WHITE")
+        promoted_piece = pawn.promote("knight")
+        self.assertIsInstance(promoted_piece, Knight)
+
+    def test_invalid_promotion_choice(self):
+        pawn = Pawn("WHITE")
+        with self.assertRaises(ValueError):
+            pawn.promote("invalid_choice")
+
 
 if __name__ == '__main__':
     unittest.main()

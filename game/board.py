@@ -39,5 +39,10 @@ class Board:
         row, col = position 
         target_piece = self.get_piece(row, col)
         return target_piece is not None and target_piece.get_color() != piece.get_color()
+    
+    def set_piece(self, position, piece):
+        row, col = position
+        self.board[row][col] = piece
+
 
 

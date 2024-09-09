@@ -1,5 +1,9 @@
 from .piece import Piece
 from .board import Board
+from .queen import Queen
+from .rook import Rook
+from .bishop import Bishop
+from .knight import Knight
 
 class Pawn(Piece):
     def __init__(self, color):
@@ -11,9 +15,11 @@ class Pawn(Piece):
         moves = []
 
         if self.get_color() == "WHITE":
-            direction = -1  # Peón blanco se mueve hacia arriba en el tablero
+            direction = -1  # Peón blanco se mueve hacia arriba
+            promotion_row = 0
         else:
-            direction = 1  # Peón negro se mueve hacia abajo en el tablero
+            direction = 1  # Peón negro se mueve hacia abajo
+            promotion_row = 7
 
         # Movimiento hacia adelante
         forward_move = (row + direction, col)
@@ -38,3 +44,16 @@ class Pawn(Piece):
 
     def move(self):
         self.__moved__ = True
+
+    def promote(self, choice):
+        """Promociona el peón a la pieza elegida por el jugador."""
+        if choice == "queen":
+            return Queen(self.get_color())
+        elif choice == "rook":
+            return Rook(self.get_color())
+        elif choice == "bishop":
+            return Bishop(self.get_color())
+        elif choice == "knight":
+            return Knight(self.get_color())
+        else:
+            raise ValueError("Promoción inválida")

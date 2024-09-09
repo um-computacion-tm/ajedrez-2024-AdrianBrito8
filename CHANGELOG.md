@@ -172,3 +172,12 @@
 
 ## Tests
 -Tests for Queen's can_attack functionality.
+
+##[2024-09-08]
+
+## Added:
+- `Pawn` Class: Implemented a new method to promove pawn.
+- `Board` Class: Implemented set_piece.
+
+## Tests
+- Tested in `test_pawn` all pieces to promote.
