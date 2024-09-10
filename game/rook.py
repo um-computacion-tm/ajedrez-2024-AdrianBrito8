@@ -5,10 +5,9 @@ class Rook(Piece):
         super().__init__(color)
     
     def __str__(self):
-        return f"R({self.__color__[0]})"
+        return f"R({self.get_color()[0]})"  # Usa get_color() para acceder al color
     
     def valid_moves(self, position):
-        """Returns a list of valid moves for the Rook from the given position (row, col)."""
         row, col = position
         moves = []
 
@@ -16,7 +15,6 @@ class Rook(Piece):
         for c in range(8):
             if c != col:
                 moves.append((row, c))
-        
         # Vertical moves
         for r in range(8):
             if r != row:

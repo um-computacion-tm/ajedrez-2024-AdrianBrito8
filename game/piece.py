@@ -28,6 +28,3 @@ class Piece:
 
     def capture(self):
         self.__captured__ = True
-
-    def __str__(self):
-        return f"{self.__class__.__name__}({self.__color__})"

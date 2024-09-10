@@ -11,7 +11,6 @@ class Bishop(Piece):
     def valid_moves(self, position):
         row, col = position
         moves = []
-        
         # Diagonal moves in all four directions
         for i in range(1, 8):
             if row - i >= 0 and col + i < 8:
@@ -22,8 +21,8 @@ class Bishop(Piece):
                 moves.append((row + i, col + i))
             if row + i < 8 and col - i >= 0:
                 moves.append((row + i, col - i))
-        
         return moves
+
     
     def can_attack(self, target_position, board):
         if self.position is None:

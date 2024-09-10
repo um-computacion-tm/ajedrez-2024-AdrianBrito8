@@ -50,15 +50,16 @@ class TestPawn(unittest.TestCase):
         pawn_white = Pawn("WHITE")
         board.place_piece(pawn_white, 6, 4)
 
-        pawn_black_left = Rook("BLACK")
+        pawn_black_left = Pawn("BLACK")
         board.place_piece(pawn_black_left, 5, 3)  # En diagonal a la izquierda
 
-        pawn_black_right = Rook("BLACK")
+        pawn_black_right = Pawn("BLACK")
         board.place_piece(pawn_black_right, 5, 5)  # En diagonal a la derecha
 
         moves = pawn_white.valid_moves((6, 4), board)
         expected_moves = [(5, 4), (4, 4), (5, 3), (5, 5)]  # Incluye capturas diagonales
         self.assertCountEqual(moves, expected_moves)
+
 
 class TestPawnPromotion(unittest.TestCase):
     def test_pawn_promotion_to_queen(self):

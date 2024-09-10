@@ -181,3 +181,11 @@
 
 ## Tests
 - Tested in `test_pawn` all pieces to promote.
+
+##[2024-09-09]
+ 
+## Added:
+- EXceptions
+
+## Tried
+- Tried to implement chess but didnt work
