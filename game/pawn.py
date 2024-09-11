@@ -10,7 +10,7 @@ class Pawn(Piece):
         super().__init__(color)
         self.__moved__ = False  
 
-    def valid_moves(self, position, board):
+    def valid_moves(self, position, board=None):
         row, col = position
         moves = []
 

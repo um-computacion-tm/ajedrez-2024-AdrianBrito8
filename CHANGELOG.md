@@ -189,3 +189,8 @@
 
 ## Tried
 - Tried to implement chess but didnt work
+
+##[2024-09-10]
+
+## Tried
+- Second try on chess, i think i made a progress

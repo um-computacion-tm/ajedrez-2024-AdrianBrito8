@@ -1,52 +1,54 @@
-
-from .board import Board
-from .exceptions import InvalidMove, InvalidTurn, EmptyPosition
+# game/chess.py
+from game.board import Board
 from game.pawn import Pawn
+from game.queen import Queen
+from game.rook import Rook
+from game.bishop import Bishop
+from game.knight import Knight
+from game.exceptions import InvalidMove, InvalidTurn, EmptyPosition
 
 class Chess:
     def __init__(self):
-        self.__board__ = Board()
-        self.__turn__ = "WHITE"
+        self.board = Board()
+        self.current_turn = "WHITE"  # Comienza con el turno de las piezas blancas
 
-    def is_playing(self):
-        return True
-
-    def move(self, from_row, from_col, to_row, to_col):
-        piece = self.__board__.get_piece(from_row, from_col)
+    def move(self, start_row, start_col, end_row, end_col, promotion_choice=None):
+        # Verifica el turno actual
+        piece = self.board.get_piece(start_row, start_col)
         if piece is None:
-            raise EmptyPosition("No piece at the starting position.")
-
-        if not hasattr(piece, 'get_color'):
-            raise AttributeError("The piece does not have a color attribute.")
-
-        if piece.get_color() != self.turn:
-            raise InvalidTurn("It's not the turn of the player who owns the piece.")
-
-        if (to_row, to_col) not in piece.valid_moves((from_row, from_col), self.__board__):
-
-            raise InvalidMove("Move is not valid for the piece.")
-
-        self.__board__.move_piece(from_row, from_col, to_row, to_col)
-
-        if isinstance(piece, Pawn):
-            if (piece.get_color() == "WHITE" and to_row == 0) or (piece.get_color() == "BLACK" and to_row == 7):
-                choice = input("Promote pawn to (queen/rook/bishop/knight): ").strip().lower()
-                try:
-                    promoted_piece = piece.promote(choice)
-                    self.__board__.place_piece(promoted_piece, to_row, to_col)
-                except ValueError as e:
-                    print(f"Error: {e}")
-                    self.__board__.move_piece(to_row, to_col, from_row, from_col)
-                    raise
+            raise EmptyPosition("No piece at the source position.")
+        if piece.get_color() != self.current_turn:
+            raise InvalidTurn("It is not your turn to move this piece.")
+        
+        # Verifica el movimiento válido
+        if not self.is_valid_move(start_row, start_col, end_row, end_col):
+            raise InvalidMove("Invalid move for this piece.")
+        
+        # Si es un peón y ha llegado al final del tablero, maneja la promoción
+        if isinstance(piece, Pawn) and (end_row == 0 or end_row == 7):
+            if promotion_choice not in ["queen", "rook", "bishop", "knight"]:
+                raise ValueError("Invalid promotion choice.")
+            self.promote_pawn(start_row, start_col, end_row, end_col, promotion_choice)
         else:
-            self.change_turn()
+            # Mueve la pieza
+            self.board.move_piece(start_row, start_col, end_row, end_col)
+        
+        # Cambia el turno
+        self.current_turn = "WHITE" if self.current_turn == "BLACK" else "BLACK"
 
-    @property
-    def turn(self):
-        return self.__turn__
+    def is_valid_move(self, start_row, start_col, end_row, end_col):
+        # Implementa la lógica para validar el movimiento
+        piece = self.board.get_piece(start_row, start_col)
+        return piece and (start_row != end_row or start_col != end_col)  # Ejemplo simple
 
-    def show_board(self):
-        return str(self.__board__)
-
-    def change_turn(self):
-        self.__turn__ = "BLACK" if self.__turn__ == "WHITE" else "WHITE"
+    def promote_pawn(self, start_row, start_col, end_row, end_col, promotion_choice):
+        # Implementa la lógica para promover un peón
+        color = self.board.get_piece(start_row, start_col).get_color()
+        if promotion_choice == "queen":
+            self.board.place_piece(Queen(color), end_row, end_col)
+        elif promotion_choice == "rook":
+            self.board.place_piece(Rook(color), end_row, end_col)
+        elif promotion_choice == "bishop":
+            self.board.place_piece(Bishop(color), end_row, end_col)
+        elif promotion_choice == "knight":
+            self.board.place_piece(Knight(color), end_row, end_col)

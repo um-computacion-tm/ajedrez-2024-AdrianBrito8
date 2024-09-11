@@ -7,7 +7,7 @@ class King(Piece):
     def __str__(self):
         return f"K({self.get_color()[0]})"
 
-    def valid_moves(self, position, board):
+    def valid_moves(self, position, board=None):
         row, col = position
         potential_moves = [
             (row + 1, col), (row - 1, col),  # Vertical moves

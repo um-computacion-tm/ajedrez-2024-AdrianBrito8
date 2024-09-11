@@ -11,7 +11,7 @@ class Queen(Piece):
     def __str__(self):
         return f"Q({self.get_color()[0]})"
     
-    def valid_moves(self, position):
+    def valid_moves(self, position, board=None):
         rook_moves = self.rook.valid_moves(position)
         bishop_moves = self.bishop.valid_moves(position)
         return rook_moves + bishop_moves

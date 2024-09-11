@@ -7,7 +7,7 @@ class Rook(Piece):
     def __str__(self):
         return f"R({self.get_color()[0]})"  # Usa get_color() para acceder al color
     
-    def valid_moves(self, position):
+    def valid_moves(self, position, board=None):
         row, col = position
         moves = []
 

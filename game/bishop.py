@@ -8,7 +8,7 @@ class Bishop(Piece):
     def __str__(self):
         return f"B({self.get_color()[0]})"
     
-    def valid_moves(self, position):
+    def valid_moves(self, position, board=None):
         row, col = position
         moves = []
         # Diagonal moves in all four directions

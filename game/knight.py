@@ -13,7 +13,7 @@ class Knight:
         color_initial = "W" if self.color == "WHITE" else "B"
         return f"N({color_initial})"
 
-    def valid_moves(self, position, board):
+    def valid_moves(self, position, board=None):
         row, col = position
         moves = []
 
