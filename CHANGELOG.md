@@ -194,3 +194,11 @@
 
 ## Tried
 - Second try on chess, i think i made a progress
+
+##[2024-09-13]
+
+## Improved:
+- Chess finally works
+
+## Test
+- Tests `CHess`: improved `test_invalid_move` and finally works

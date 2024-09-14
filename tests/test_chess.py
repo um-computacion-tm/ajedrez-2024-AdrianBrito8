@@ -19,10 +19,12 @@ class TestChess(unittest.TestCase):
         self.assertEqual(self.game.board.get_piece(5, 0).get_color(), "WHITE")
 
     def test_invalid_move(self):
-        
-        self.game.move(6, 0, 5, 0)  # Mueve un peón blanco para dejar la posición (6, 0) vacía
+        # Coloca un peón blanco en una posición inicial y muévelo
+        self.game.board.place_piece(Pawn("WHITE"), 6, 0)
+        self.game.move(6, 0, 5, 0)  # Mueve un peón blanco
+
         with self.assertRaises(EmptyPosition):
-            self.game.move(0, 0, 1, 0)  # Ahora la posición (0, 0) debería estar vacía
+            self.game.move(5, 1, 4, 1)  # Esta posición debería estar vacía
 
     def test_invalid_turn(self):
         self.game.move(6, 0, 5, 0)  # Mueve un peón blanco
