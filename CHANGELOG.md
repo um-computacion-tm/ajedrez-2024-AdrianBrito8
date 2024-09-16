@@ -202,3 +202,8 @@
 
 ## Test
 - Tests `CHess`: improved `test_invalid_move` and finally works
+
+##[2024-09-15]
+
+## Improved:
+- Starting de implementation of `Cli`

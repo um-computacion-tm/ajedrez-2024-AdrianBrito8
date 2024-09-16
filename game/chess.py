@@ -1,4 +1,3 @@
-# game/chess.py
 from game.board import Board
 from game.pawn import Pawn
 from game.queen import Queen
