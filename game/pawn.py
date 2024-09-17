@@ -1,5 +1,4 @@
 from .piece import Piece
-from .board import Board
 from .queen import Queen
 from .rook import Rook
 from .bishop import Bishop

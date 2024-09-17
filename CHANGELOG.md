@@ -207,3 +207,8 @@
 
 ## Improved:
 - Starting de implementation of `Cli`
+
+##[2024-09-16]
+
+## Improved:
+- Implemented all pieces on the `Board` (maybe i had to do it earlier)

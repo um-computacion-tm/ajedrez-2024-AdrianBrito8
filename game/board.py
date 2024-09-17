@@ -1,4 +1,9 @@
-from .rook import Rook
+from game.rook import Rook
+from game.queen import Queen
+from game.bishop import Bishop
+from game.knight import Knight
+from game.king import King
+from game.pawn import Pawn
 from game.exceptions import InvalidMove, InvalidTurn, EmptyPosition
 
 class Board:
@@ -8,15 +13,37 @@ class Board:
         self.setup_initial_pieces()
 
     def setup_initial_pieces(self):
-        # Configuración inicial de las piezas
+        # Coloca peones
         for col in range(8):
-            self.__positions__[1][col] = Rook("BLACK")  # Suponiendo que colocas torres negras en la fila 1
-            self.__positions__[6][col] = Rook("WHITE")  # Suponiendo que colocas torres blancas en la fila 6
-        
-        pieces = [Rook] * 8  # Por ahora, solo rooks como ejemplo; ajusta según sea necesario
-        for col, piece_class in enumerate(pieces):
-            self.__positions__[0][col] = piece_class("BLACK")
-            self.__positions__[7][col] = piece_class("WHITE")
+            self.__positions__[1][col] = Pawn("BLACK")
+            self.__positions__[6][col] = Pawn("WHITE")
+    
+        # Coloca torres
+        self.__positions__[0][0] = Rook("BLACK")
+        self.__positions__[0][7] = Rook("BLACK")
+        self.__positions__[7][0] = Rook("WHITE")
+        self.__positions__[7][7] = Rook("WHITE")
+
+        # Coloca caballos
+        self.__positions__[0][1] = Knight("BLACK")
+        self.__positions__[0][6] = Knight("BLACK")
+        self.__positions__[7][1] = Knight("WHITE")
+        self.__positions__[7][6] = Knight("WHITE")
+
+        # Coloca alfiles
+        self.__positions__[0][2] = Bishop("BLACK")
+        self.__positions__[0][5] = Bishop("BLACK")
+        self.__positions__[7][2] = Bishop("WHITE")
+        self.__positions__[7][5] = Bishop("WHITE")
+
+        # Coloca reinas
+        self.__positions__[0][3] = Queen("BLACK")
+        self.__positions__[7][3] = Queen("WHITE")
+
+        # Coloca reyes
+        self.__positions__[0][4] = King("BLACK")
+        self.__positions__[7][4] = King("WHITE")
+
     
     def get_piece(self, row, col):
         if 0 <= row < 8 and 0 <= col < 8:
