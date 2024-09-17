@@ -29,6 +29,16 @@ class TestRook(unittest.TestCase):
         expected_moves = [(3, i) for i in range(8) if i != 3] + [(i, 3) for i in range(8) if i != 3]
         self.assertCountEqual(moves, expected_moves)
 
+    def test_rook_invalid_moves(self):
+        rook = Rook("BLACK")
+
+        # Position at (0, 0) - Movimientos válidos: solo en la misma fila o columna
+        invalid_moves = [(1, 1), (2, 2), (3, 3), (7, 7)]  # Movimientos diagonales inválidos
+        valid_moves = rook.valid_moves((0, 0))
+
+        for move in invalid_moves:
+            self.assertNotIn(move, valid_moves)
+
     def test_rook_valid_moves_edge_case(self):
         rook = Rook("WHITE")
         

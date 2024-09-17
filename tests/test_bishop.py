@@ -43,6 +43,20 @@ class TestBishop(unittest.TestCase):
         
         self.assertCountEqual(moves, expected_moves)
 
+    def test_bishop_invalid_moves(self):
+        bishop = Bishop("WHITE", (4, 4))  # Posición central del tablero
+        board = Board()
+
+        # Movimientos que no son válidos para el alfil (no diagonales)
+        invalid_moves = [(4, 5), (4, 6), (3, 4), (5, 4), (6, 4)]
+    
+        # Obtener los movimientos válidos
+        valid_moves = bishop.valid_moves((4, 4), board)
+
+        for move in invalid_moves:
+            self.assertNotIn(move, valid_moves)
+
+
     def test_bishop_can_attack(self):
         board = Board()
         bishop = Bishop("WHITE", (4, 4))

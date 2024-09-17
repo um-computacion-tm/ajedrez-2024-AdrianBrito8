@@ -29,6 +29,20 @@ class TestKnight(unittest.TestCase):
         ]
         self.assertCountEqual(moves, expected_moves)
 
+    def test_knight_invalid_moves(self):
+        knight = Knight("BLACK", (4, 4))  # Posición inicial en el centro del tablero
+        board = Board()
+
+        # Movimientos que no son válidos para el caballo
+        invalid_moves = [(4, 5), (3, 3), (5, 5), (6, 6), (2, 4)]
+    
+        # Obtener los movimientos válidos
+        valid_moves = knight.valid_moves((4, 4), board)
+
+        for move in invalid_moves:
+            self.assertNotIn(move, valid_moves)
+
+
     def test_knight_can_attack(self):
         board = Board()
         knight = Knight("WHITE", (3, 3))  # Set initial position

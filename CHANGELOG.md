@@ -212,3 +212,8 @@
 
 ## Improved:
 - Implemented all pieces on the `Board` (maybe i had to do it earlier)
+
+##[2024-09-17]
+
+## Added:
+- Added `test_invalid_moves` in `Bishop`, `Rook`, `Knight`
