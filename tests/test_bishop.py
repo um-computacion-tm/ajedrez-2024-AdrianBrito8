@@ -62,15 +62,21 @@ class TestBishop(unittest.TestCase):
         bishop = Bishop("WHITE", (4, 4))
         board.place_piece(bishop, 4, 4)
 
+        # Caso 1: El alfil puede capturar una pieza enemiga en su diagonal
         enemy_piece = Rook("BLACK")
-        board.place_piece(enemy_piece, 6, 6)
+        board.place_piece(enemy_piece, 6, 6)  # Posición diagonal a (4, 4)
+        self.assertTrue(bishop.can_attack((6, 6), board))  # Puede atacar
 
-        self.assertTrue(bishop.can_attack((6, 6), board))
-
+        # Caso 2: El alfil no puede atacar una pieza amiga
         friendly_piece = Rook("WHITE")
-        board.place_piece(friendly_piece, 3, 3)
+        board.place_piece(friendly_piece, 3, 3)  # Posición diagonal, pero misma color
+        self.assertFalse(bishop.can_attack((3, 3), board))  # No debe atacar
 
-        self.assertFalse(bishop.can_attack((3, 3), board))
+        # Caso 3: El alfil no puede atacar una pieza fuera de su rango diagonal
+        enemy_piece_far = Rook("BLACK")
+        board.place_piece(enemy_piece_far, 4, 5)  # No está en una diagonal
+        self.assertFalse(bishop.can_attack((4, 5), board))  # No puede atacar
+
 
 
 if __name__ == '__main__':

@@ -217,3 +217,8 @@
 
 ## Added:
 - Added `test_invalid_moves` in `Bishop`, `Rook`, `Knight`
+
+##[2024-09-18]
+
+## Improve:
+- Imrpoved `can_attack` in `Bishop`
