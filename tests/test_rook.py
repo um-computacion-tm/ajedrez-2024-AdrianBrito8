@@ -1,5 +1,7 @@
 import unittest
 from game.rook import Rook
+from game.board import Board
+from game.piece import Piece
 
 class TestRook(unittest.TestCase):
     def test_rook_color(self):
@@ -55,14 +57,30 @@ class TestRook(unittest.TestCase):
         self.assertCountEqual(moves, expected_moves)
 
     def test_rook_can_attack(self):
-        rook = Rook("BLACK")
+        board = Board()
 
-        # Rook at (0, 0)
-        self.assertTrue(rook.can_attack((0, 0), (0, 7)))  # Same row
-        self.assertTrue(rook.can_attack((0, 0), (7, 0)))  # Same column
-        self.assertFalse(rook.can_attack((0, 0), (7, 7)))  # Not in the same row/column
+        # Colocar la torre en la posición (0, 0)
+        rook = Rook("BLACK", (0, 0))
+        board.place_piece(rook, 0, 0)
 
+        # Añadir una pieza enemiga en la misma fila
+        enemy_piece = Piece("WHITE")
+        board.place_piece(enemy_piece, 0, 7)
+        
+        # Añadir una pieza enemiga en la misma columna
+        enemy_piece_2 = Piece("WHITE")
+        board.place_piece(enemy_piece_2, 7, 0)
 
+        # Añadir una pieza aliada en la misma fila (no debería poder atacar)
+        friendly_piece = Piece("BLACK")
+        board.place_piece(friendly_piece, 0, 5)
+
+        # Comprobamos que puede atacar a las piezas enemigas pero no a la pieza aliada
+        self.assertTrue(rook.can_attack((0, 7), board))  # Puede capturar en la misma fila
+        self.assertTrue(rook.can_attack((7, 0), board))  # Puede capturar en la misma columna
+        self.assertFalse(rook.can_attack((0, 5), board))  # No puede atacar a su propio color
+        self.assertFalse(rook.can_attack((7, 7), board))  # No puede atacar fuera de la fila/columna
 
 if __name__ == '__main__':
     unittest.main()
+

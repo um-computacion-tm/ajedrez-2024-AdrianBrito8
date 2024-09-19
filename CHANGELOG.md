@@ -222,3 +222,8 @@
 
 ## Improve:
 - Imrpoved `can_attack` in `Bishop`
+
+##[2024-09-19]
+
+## Improve:
+- Imrpoved `can_attack` in `Rook`
