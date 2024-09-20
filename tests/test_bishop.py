@@ -77,6 +77,23 @@ class TestBishop(unittest.TestCase):
         board.place_piece(enemy_piece_far, 4, 5)  # No está en una diagonal
         self.assertFalse(bishop.can_attack((4, 5), board))  # No puede atacar
 
+    def test_bishop_cannot_attack_friendly(self):
+        board = Board()
+        bishop = Bishop("WHITE", (4, 4))
+        board.place_piece(bishop, 4, 4)
+
+        friendly_piece = Rook("WHITE")
+        board.place_piece(friendly_piece, 6, 6)
+
+        self.assertFalse(bishop.can_attack((6, 6), board))
+
+    def test_bishop_cannot_attack_empty(self):
+        board = Board()
+        bishop = Bishop("WHITE", (4, 4))
+        board.place_piece(bishop, 4, 4)
+
+        self.assertFalse(bishop.can_attack((5, 5), board))
+
 
 
 if __name__ == '__main__':

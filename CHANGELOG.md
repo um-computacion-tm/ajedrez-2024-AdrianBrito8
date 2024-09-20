@@ -227,3 +227,8 @@
 
 ## Improve:
 - Imrpoved `can_attack` in `Rook`
+
+##[2024-09-20]
+
+## Added:
+- Added `cannot_attack` tests in `Rook` and `Bishop`

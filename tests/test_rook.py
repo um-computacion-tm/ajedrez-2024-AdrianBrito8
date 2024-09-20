@@ -2,6 +2,7 @@ import unittest
 from game.rook import Rook
 from game.board import Board
 from game.piece import Piece
+from game.bishop import Bishop
 
 class TestRook(unittest.TestCase):
     def test_rook_color(self):
@@ -80,6 +81,23 @@ class TestRook(unittest.TestCase):
         self.assertTrue(rook.can_attack((7, 0), board))  # Puede capturar en la misma columna
         self.assertFalse(rook.can_attack((0, 5), board))  # No puede atacar a su propio color
         self.assertFalse(rook.can_attack((7, 7), board))  # No puede atacar fuera de la fila/columna
+
+    def test_rook_cannot_attack_friendly(self):
+        board = Board()
+        rook = Rook("BLACK", (0, 0))
+        board.place_piece(rook, 0, 0)
+
+        friendly_piece = Bishop("BLACK")
+        board.place_piece(friendly_piece, 0, 7)
+
+        self.assertFalse(rook.can_attack((0, 7), board))
+
+    def test_rook_cannot_attack_empty(self):
+        board = Board()
+        rook = Rook("BLACK", (0, 0))
+        board.place_piece(rook, 0, 0)
+
+        self.assertFalse(rook.can_attack((0, 7), board))
 
 if __name__ == '__main__':
     unittest.main()
