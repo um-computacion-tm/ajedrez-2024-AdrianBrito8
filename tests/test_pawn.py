@@ -60,6 +60,40 @@ class TestPawn(unittest.TestCase):
         expected_moves = [(5, 4), (4, 4), (5, 3), (5, 5)]  # Incluye capturas diagonales
         self.assertCountEqual(moves, expected_moves)
 
+    def test_pawn_can_attack_enemy(self):
+        board = Board()
+        pawn_white = Pawn("WHITE")
+
+        board.place_piece(pawn_white, 6, 4)
+        pawn_white.position = (6, 4)
+
+        enemy_piece = Rook("BLACK")
+        board.place_piece(enemy_piece, 5, 3)  # En diagonal
+
+        self.assertTrue(pawn_white.can_attack((5, 3), board))
+
+    def test_pawn_cannot_attack_friendly(self):
+        board = Board()
+        pawn_white = Pawn("WHITE")
+
+        board.place_piece(pawn_white, 6, 4)
+        pawn_white.position = (6, 4)
+
+        friendly_piece = Rook("WHITE")
+        board.place_piece(friendly_piece, 5, 3)  # En diagonal
+
+        self.assertFalse(pawn_white.can_attack((5, 3), board))
+
+    def test_pawn_cannot_attack_empty(self):
+        board = Board()
+        pawn_white = Pawn("WHITE")
+
+        board.place_piece(pawn_white, 6, 4)
+        pawn_white.position = (6, 4)
+
+        # No hay ninguna pieza en esta posición
+        self.assertFalse(pawn_white.can_attack((5, 3), board))
+
 
 class TestPawnPromotion(unittest.TestCase):
     def test_pawn_promotion_to_queen(self):
@@ -90,4 +124,3 @@ class TestPawnPromotion(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

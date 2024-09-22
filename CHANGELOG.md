@@ -237,3 +237,11 @@
 ## Added:
 - Added `cannot_attack` tests in `Knight`
 
+##[2024-09-22]
+## Added:
+- Added `can_attack` in `Pawn`
+- Added logic to decompose target_position into row and col.
+
+## Tests:
+- Tests added for `can_attack` and some extra cases
+

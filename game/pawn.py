@@ -5,9 +5,10 @@ from .bishop import Bishop
 from .knight import Knight
 
 class Pawn(Piece):
-    def __init__(self, color):
+    def __init__(self, color, position=None):
         super().__init__(color)
         self.__moved__ = False  
+        self.position = position
 
     def valid_moves(self, position, board=None):
         row, col = position
@@ -43,6 +44,27 @@ class Pawn(Piece):
 
     def move(self):
         self.__moved__ = True
+
+    def can_attack(self, target_position, board):
+        """
+        Verifica si el peón puede atacar una pieza enemiga en la posición de destino.
+        """
+        if not self.position:
+            raise ValueError("La posición del peón no está definida.")
+        
+        current_row, current_col = self.position
+        target_row, target_col = target_position
+
+        # El peón ataca solo en diagonal un paso
+        direction = -1 if self.get_color() == "WHITE" else 1
+
+        # Verificar que el movimiento es un paso en diagonal
+        if abs(target_col - current_col) == 1 and target_row - current_row == direction:
+            target_piece = board.get_piece(target_row, target_col)  # Descomponer posición
+            if target_piece is not None and target_piece.get_color() != self.get_color():
+                return True
+        
+        return False
 
     def promote(self, choice):
         """Promociona el peón a la pieza elegida por el jugador."""
