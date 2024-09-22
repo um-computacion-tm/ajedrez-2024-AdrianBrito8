@@ -232,3 +232,8 @@
 
 ## Added:
 - Added `cannot_attack` tests in `Rook` and `Bishop`
+
+##[2024-09-21]
+## Added:
+- Added `cannot_attack` tests in `Knight`
+
