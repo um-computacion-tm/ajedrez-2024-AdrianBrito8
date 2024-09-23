@@ -245,3 +245,7 @@
 ## Tests:
 - Tests added for `can_attack` and some extra cases
 
+##[2024-09-23]
+## Improve:
+-Imrpoved `can_attack` and `cannot_attack` tests in `King`
+

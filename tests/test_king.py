@@ -29,20 +29,32 @@ class TestKing(unittest.TestCase):
         ]
         self.assertCountEqual(moves, expected_moves)
 
-        def test_king_can_attack(self):
-            board = Board()
-            king = King("WHITE")
-            board.place_piece(king, 4, 4)
+    def test_king_can_attack(self):
+        board = Board()
+        king = King("WHITE")
+        board.place_piece(king, 4, 4)
 
-            # Test attack on an enemy piece (should attack)
-            enemy_piece = Rook("BLACK")
-            board.place_piece(enemy_piece, 5, 5)
-            self.assertIn((5, 5), king.valid_moves((4, 4), board))
+        # Test attack on an enemy piece (should attack)
+        enemy_piece = Rook("BLACK")
+        board.place_piece(enemy_piece, 5, 5)
+        self.assertIn((5, 5), king.valid_moves((4, 4), board))
 
-            # Test that it cannot attack a friendly piece (should not attack)
-            friendly_piece = Rook("WHITE")
-            board.place_piece(friendly_piece, 3, 3)
-            self.assertNotIn((3, 3), king.valid_moves((4, 4), board))
+    def test_king_cannot_attack_friendly(self):
+        board = Board()
+        king = King("WHITE")
+        board.place_piece(king, 4, 4)
+
+        # Test that it cannot attack a friendly piece
+        friendly_piece = Rook("WHITE")
+        board.place_piece(friendly_piece, 3, 3)
+        self.assertNotIn((3, 3), king.valid_moves((4, 4), board))
+
+    def test_king_cannot_attack_empty(self):
+        board = Board()
+        king = King("WHITE")
+        board.place_piece(king, 4, 4)
+
+        self.assertIn((5, 5), king.valid_moves((4, 4), board))
 
 
 if __name__ == '__main__':
