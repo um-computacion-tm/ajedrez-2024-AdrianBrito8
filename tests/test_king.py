@@ -29,6 +29,29 @@ class TestKing(unittest.TestCase):
         ]
         self.assertCountEqual(moves, expected_moves)
 
+    def test_king_invalid_moves(self):
+        board = Board()
+        king = King("WHITE")
+        board.place_piece(king, 4, 4)
+
+        # Colocar una pieza amiga en una posición adyacente
+        friendly_piece = Rook("WHITE")
+        board.place_piece(friendly_piece, 5, 5)
+
+        # Obtener los movimientos válidos del rey
+        valid_moves = king.valid_moves((4, 4), board)
+
+        # Movimientos inválidos que el rey no debe hacer
+        invalid_moves = [
+            (8, 8),  # Fuera del tablero
+            (5, 5)   # Casilla ocupada por una pieza amiga
+        ]
+
+        # Asegurarse de que estos movimientos no estén entre los movimientos válidos
+        for move in invalid_moves:
+            self.assertNotIn(move, valid_moves)
+
+
     def test_king_can_attack(self):
         board = Board()
         king = King("WHITE")

@@ -249,3 +249,6 @@
 ## Improve:
 -Imrpoved `can_attack` and `cannot_attack` tests in `King`
 
+##[2024-09-24]
+## Added:
+- Added `invalid_moves` in `King`
