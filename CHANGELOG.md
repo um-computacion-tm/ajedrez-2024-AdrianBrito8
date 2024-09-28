@@ -252,3 +252,7 @@
 ##[2024-09-24]
 ## Added:
 - Added `invalid_moves` in `King`
+
+##[2024-09-27]
+## Added:
+- Added `invalid_moves` in `Queen`

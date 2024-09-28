@@ -51,13 +51,36 @@ class TestQueen(unittest.TestCase):
         
         self.assertCountEqual(moves, expected_moves)
 
+    def test_queen_invalid_moves(self):
+        board = Board()
+        queen = Queen("WHITE")
+        position = (4, 4)
+
+        # Colocar la reina en la posición (4, 4)
+        board.place_piece(queen, *position)
+
+        invalid_moves = [
+            (4, 4),  # Misma posición
+            (2, 5),  # Movimiento de "L" como un caballo
+            (6, 3),  # Movimiento que no es recto ni diagonal
+            (1, 6),  # Movimiento que no es recto ni diagonal
+            (5, 1),  # Movimiento que no es recto ni diagonal
+            (3, 7)   # Movimiento que no es recto ni diagonal
+        ]
+
+        # Movimientos válidos
+        valid_moves = queen.valid_moves(position, board)
+
+        for move in invalid_moves:
+            self.assertNotIn(move, valid_moves)
+
     def test_queen_can_attack_enemy(self):
         board = Board()
         queen = Queen("WHITE")
 
         # Colocar la reina manualmente en el tablero
         board.place_piece(queen, 4, 4)
-        queen.position = (4, 4)  # Establecer la posición aquí
+        queen.position = (4, 4) 
 
         enemy_piece = Rook("BLACK")
         board.place_piece(enemy_piece, 6, 6)
@@ -85,7 +108,5 @@ class TestQueen(unittest.TestCase):
 
         self.assertFalse(queen.can_attack((5, 5), board))
 
-
-
 if __name__ == '__main__':
-        unittest.main()
+    unittest.main()
