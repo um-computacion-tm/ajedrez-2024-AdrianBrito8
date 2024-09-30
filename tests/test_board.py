@@ -5,7 +5,8 @@ from game.pawn import Pawn
 from game.knight import Knight
 from game.bishop import Bishop
 from game.queen import Queen
-from game.king import King  # Asegúrate de que esta importación exista y sea correcta
+from game.king import King
+from game.exceptions import InvalidMove, InvalidTurn, EmptyPosition
 
 class TestBoard(unittest.TestCase):
     def setUp(self):
@@ -51,7 +52,6 @@ class TestBoard(unittest.TestCase):
         self.assertIsInstance(self.board.get_piece(7, 6), Knight)
         self.assertIsInstance(self.board.get_piece(7, 7), Rook)
 
-
     def test_get_piece_out_of_bounds(self):
         # Verifica que se lanza una excepción IndexError para posiciones fuera del tablero
         with self.assertRaises(IndexError):
@@ -64,17 +64,28 @@ class TestBoard(unittest.TestCase):
             self.board.get_piece(0, 8)
 
     def test_move_piece(self):
-        # Mueve la torre negra de (0, 0) a (0, 4)
-        self.board.move_piece(0, 0, 0, 4)
-        self.assertIsNone(self.board.get_piece(0, 0))
-        self.assertIsInstance(self.board.get_piece(0, 4), Rook)
-        self.assertEqual(self.board.get_piece(0, 4).get_color(), "BLACK")
-        
-        # Mueve la torre blanca de (7, 7) a (5, 7)
+        # Mueve un peón blanco de (6, 0) a (4, 0)
+        self.board.move_piece(6, 0, 4, 0)
+        self.assertIsNone(self.board.get_piece(6, 0))
+        self.assertIsInstance(self.board.get_piece(4, 0), Pawn)
+        self.assertEqual(self.board.get_piece(4, 0).get_color(), "WHITE")
+
+        # Turno de las negras: mover un peón negro de (1, 0) a (3, 0)
+        self.board.move_piece(1, 0, 3, 0)
+        self.assertIsNone(self.board.get_piece(1, 0))
+        self.assertIsInstance(self.board.get_piece(3, 0), Pawn)
+        self.assertEqual(self.board.get_piece(3, 0).get_color(), "BLACK")
+
+        # Ahora es el turno de las blancas: intenta mover la torre blanca de (7, 7) a (5, 7)
         self.board.move_piece(7, 7, 5, 7)
         self.assertIsNone(self.board.get_piece(7, 7))
         self.assertIsInstance(self.board.get_piece(5, 7), Rook)
         self.assertEqual(self.board.get_piece(5, 7).get_color(), "WHITE")
+
+        # Intentar un movimiento inválido para la torre negra (0, 7) a (1, 6) (debe fallar)
+        with self.assertRaises(InvalidMove):
+            self.board.move_piece(0, 7, 1, 6)
+
 
     def test_move_piece_out_of_bounds(self):
         # Verifica que se lanza una excepción IndexError para movimientos fuera del tablero

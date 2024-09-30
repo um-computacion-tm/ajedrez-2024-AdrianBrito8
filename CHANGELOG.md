@@ -256,3 +256,11 @@
 ##[2024-09-27]
 ## Added:
 - Added `invalid_moves` in `Queen`
+
+##[2024-09-29]
+## Improve:
+- `Board` Class Improvements:
+- Enhanced move_piece Validation: Added comprehensive turn validation to ensure that moves alternate correctly between black and white pieces.
+- Enhanced Exceptions: Introduced the InvalidTurn exception to indicate when a move is attempted out of turn.
+- Bug Fix: Fixed a bug where moves to positions occupied by enemy pieces were incorrectly flagged as invalid. Now, capturing enemy pieces is allowed as per chess rules.
+- Validation Refinements: Improved boundary checks and validation in the move_piece method to ensure proper handling of all movement rules.

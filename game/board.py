@@ -11,6 +11,7 @@ class Board:
         # Inicializa el tablero con posiciones vacías
         self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
         self.setup_initial_pieces()
+        self.current_turn = "WHITE"
 
     def setup_initial_pieces(self):
         # Coloca peones
@@ -43,7 +44,6 @@ class Board:
         # Coloca reyes
         self.__positions__[0][4] = King("BLACK")
         self.__positions__[7][4] = King("WHITE")
-
     
     def get_piece(self, row, col):
         if 0 <= row < 8 and 0 <= col < 8:
@@ -52,26 +52,37 @@ class Board:
             raise IndexError("Position out of board range.")
 
     def move_piece(self, start_row, start_col, end_row, end_col):
-        if 0 <= start_row < 8 and 0 <= start_col < 8 and 0 <= end_row < 8 and 0 <= end_col < 8:
-            piece = self.__positions__[start_row][start_col]
-            if piece is None:
-                raise EmptyPosition("No piece at the source position.")
-            if not self.is_empty_position(end_row, end_col) and self.is_enemy_piece(piece, (end_row, end_col)):
-                raise InvalidMove("Cannot move to a position occupied by an enemy piece.")
-        
-            self.__positions__[start_row][start_col] = None
-            self.__positions__[end_row][end_col] = piece
-        else:
+        if not self._in_bounds(start_row, start_col) or not self._in_bounds(end_row, end_col):
             raise IndexError("Move out of board range.")
 
+        piece = self.__positions__[start_row][start_col]
+        if piece is None:
+            raise EmptyPosition("No piece at the source position.")
+
+        # Verificar si es el turno correcto
+        if piece.get_color() != self.current_turn:
+            raise InvalidTurn("It's not your turn.")
+
+        # Verificar si el movimiento es válido para la pieza
+        valid_moves = piece.valid_moves((start_row, start_col), self)
+        if (end_row, end_col) not in valid_moves:
+            raise InvalidMove("Invalid move for the piece.")
+
+        # Realizar el movimiento
+        self.__positions__[start_row][start_col] = None
+        self.__positions__[end_row][end_col] = piece
+
+        # Cambiar el turno
+        self.current_turn = "WHITE" if self.current_turn == "BLACK" else "BLACK"
+
     def is_empty_position(self, row, col):
-        if 0 <= row < 8 and 0 <= col < 8:
+        if self._in_bounds(row, col):
             return self.__positions__[row][col] is None
         else:
             raise IndexError("Position out of board range.")
     
     def place_piece(self, piece, row, col):
-        if 0 <= row < 8 and 0 <= col < 8:
+        if self._in_bounds(row, col):
             self.__positions__[row][col] = piece
         else:
             raise IndexError("Position out of board range.")
@@ -83,4 +94,10 @@ class Board:
     
     def set_piece(self, position, piece):
         row, col = position
-        self.__positions__[row][col] = piece
+        if self._in_bounds(row, col):
+            self.__positions__[row][col] = piece
+        else:
+            raise IndexError("Position out of board range.")
+    
+    def _in_bounds(self, row, col):
+        return 0 <= row < 8 and 0 <= col < 8
