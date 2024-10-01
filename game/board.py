@@ -101,3 +101,10 @@ class Board:
     
     def _in_bounds(self, row, col):
         return 0 <= row < 8 and 0 <= col < 8
+
+    def remove_piece(self, row, col):
+    # Remove the piece at the specified position from the board
+        if self._in_bounds(row, col):
+            self.__positions__[row][col] = None
+        else:
+            raise IndexError("Position out of board range.")

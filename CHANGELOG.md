@@ -264,3 +264,14 @@
 - Enhanced Exceptions: Introduced the InvalidTurn exception to indicate when a move is attempted out of turn.
 - Bug Fix: Fixed a bug where moves to positions occupied by enemy pieces were incorrectly flagged as invalid. Now, capturing enemy pieces is allowed as per chess rules.
 - Validation Refinements: Improved boundary checks and validation in the move_piece method to ensure proper handling of all movement rules.
+
+##[2024-09-30]
+## Added:
+- Added a `remove_piece` method to the `Board` class to remove a piece from the board at a specified position.
+
+## Improve:
+- Modified the `promote_pawn` method in the `Chess` class to use the remove_piece method to remove the pawn before promoting it.
+- Modified the `is_valid_move` method in the `Chess` class to allow pawns to move to the opposite side of the board.
+- Modified the `move` method in the `Chess` class to check if the pawn has reached the opposite side of the board before promoting it.
+- Modified the `test_invalid_pawn_promotion_choice` test to expect a ValueError exception instead of an InvalidMove exception.
+- Modified the `move` method in the `Chess` class to check if the pawn has reached the opposite side of the board before checking the promotion choice.

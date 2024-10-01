@@ -12,10 +12,10 @@ class TestPawn(unittest.TestCase):
         board = Board()
 
         # Colocar peones blancos y negros en el tablero
-        pawn_white = Pawn("WHITE")
+        pawn_white = Pawn("WHITE", (6, 4))
         board.place_piece(pawn_white, 6, 4)
 
-        pawn_black = Pawn("BLACK")
+        pawn_black = Pawn("BLACK", (1, 4))
         board.place_piece(pawn_black, 1, 4)
 
         # Blancas inicia
@@ -29,13 +29,13 @@ class TestPawn(unittest.TestCase):
         self.assertCountEqual(moves, expected_moves)
 
         # Simular el primer movimiento de los peones
-        pawn_white.move()
-        pawn_black.move()
+        board.move_piece(6, 4, 5, 4)
+        pawn_white.move((5, 4))
+
+        board.move_piece(1, 4, 2, 4)
+        pawn_black.move((2, 4))
 
         # Posición tras un movimiento inicial
-        board.move_piece(6, 4, 5, 4)  
-        board.move_piece(1, 4, 2, 4)  
-
         moves = pawn_white.valid_moves((5, 4), board)
         expected_moves = [(4, 4)]  # Solo un movimiento hacia adelante disponible
         self.assertCountEqual(moves, expected_moves)
@@ -47,13 +47,13 @@ class TestPawn(unittest.TestCase):
     def test_pawn_capture_diagonal(self):
         board = Board()
         
-        pawn_white = Pawn("WHITE")
+        pawn_white = Pawn("WHITE", (6, 4))
         board.place_piece(pawn_white, 6, 4)
 
-        pawn_black_left = Pawn("BLACK")
+        pawn_black_left = Pawn("BLACK", (5, 3))
         board.place_piece(pawn_black_left, 5, 3)  # En diagonal a la izquierda
 
-        pawn_black_right = Pawn("BLACK")
+        pawn_black_right = Pawn("BLACK", (5, 5))
         board.place_piece(pawn_black_right, 5, 5)  # En diagonal a la derecha
 
         moves = pawn_white.valid_moves((6, 4), board)
@@ -62,34 +62,31 @@ class TestPawn(unittest.TestCase):
 
     def test_pawn_can_attack_enemy(self):
         board = Board()
-        pawn_white = Pawn("WHITE")
+        pawn_white = Pawn("WHITE", (6, 4))
 
         board.place_piece(pawn_white, 6, 4)
-        pawn_white.position = (6, 4)
 
-        enemy_piece = Rook("BLACK")
+        enemy_piece = Rook("BLACK", (5, 3))
         board.place_piece(enemy_piece, 5, 3)  # En diagonal
 
         self.assertTrue(pawn_white.can_attack((5, 3), board))
 
     def test_pawn_cannot_attack_friendly(self):
         board = Board()
-        pawn_white = Pawn("WHITE")
+        pawn_white = Pawn("WHITE", (6, 4))
 
         board.place_piece(pawn_white, 6, 4)
-        pawn_white.position = (6, 4)
 
-        friendly_piece = Rook("WHITE")
+        friendly_piece = Rook("WHITE", (5, 3))
         board.place_piece(friendly_piece, 5, 3)  # En diagonal
 
         self.assertFalse(pawn_white.can_attack((5, 3), board))
 
     def test_pawn_cannot_attack_empty(self):
         board = Board()
-        pawn_white = Pawn("WHITE")
+        pawn_white = Pawn("WHITE", (6, 4))
 
         board.place_piece(pawn_white, 6, 4)
-        pawn_white.position = (6, 4)
 
         # No hay ninguna pieza en esta posición
         self.assertFalse(pawn_white.can_attack((5, 3), board))

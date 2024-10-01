@@ -16,21 +16,19 @@ class Pawn(Piece):
 
         if self.get_color() == "WHITE":
             direction = -1  # Peón blanco se mueve hacia arriba
-            promotion_row = 0
         else:
             direction = 1  # Peón negro se mueve hacia abajo
-            promotion_row = 7
 
         # Movimiento hacia adelante
         forward_move = (row + direction, col)
         if 0 <= forward_move[0] < 8 and board.is_empty_position(*forward_move):
             moves.append(forward_move)
 
-        # Movimiento doble hacia adelante si no ha movido
-        if not self.__moved__:
-            double_forward_move = (row + 2 * direction, col)
-            if 0 <= double_forward_move[0] < 8 and board.is_empty_position(*double_forward_move):
-                moves.append(double_forward_move)
+            # Movimiento doble hacia adelante si no ha movido y la primera casilla está libre
+            if not self.__moved__:
+                double_forward_move = (row + 2 * direction, col)
+                if 0 <= double_forward_move[0] < 8 and board.is_empty_position(*double_forward_move):
+                    moves.append(double_forward_move)
 
         # Captura en diagonal
         for diagonal_col in [col - 1, col + 1]:
@@ -42,7 +40,8 @@ class Pawn(Piece):
 
         return moves
 
-    def move(self):
+    def move(self, new_position):
+        self.position = new_position
         self.__moved__ = True
 
     def can_attack(self, target_position, board):
@@ -60,7 +59,7 @@ class Pawn(Piece):
 
         # Verificar que el movimiento es un paso en diagonal
         if abs(target_col - current_col) == 1 and target_row - current_row == direction:
-            target_piece = board.get_piece(target_row, target_col)  # Descomponer posición
+            target_piece = board.get_piece(target_row, target_col)
             if target_piece is not None and target_piece.get_color() != self.get_color():
                 return True
         

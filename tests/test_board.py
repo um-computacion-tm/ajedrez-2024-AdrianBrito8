@@ -108,5 +108,26 @@ class TestBoard(unittest.TestCase):
         with self.assertRaises(IndexError):
             self.board.is_empty_position(8, 8)
 
+    def test_remove_piece(self):
+
+        # Coloca un peón blanco en la posición (6, 0)
+        self.board.place_piece(Pawn("WHITE"), 6, 0)
+        self.assertIsInstance(self.board.get_piece(6, 0), Pawn)
+        self.assertEqual(self.board.get_piece(6, 0).get_color(), "WHITE")
+
+        # Elimina el peón blanco de la posición (6, 0)
+
+        self.board.remove_piece(6, 0)
+        self.assertIsNone(self.board.get_piece(6, 0))
+
+        # Verifica que se lanza una excepción IndexError para posiciones fuera del tablero
+
+        with self.assertRaises(IndexError):
+            self.board.remove_piece(-1, 0)
+        with self.assertRaises(IndexError):
+            self.board.remove_piece(8, 0)
+        with self.assertRaises(IndexError):
+            self.board.remove_piece(0, 8)
+
 if __name__ == '__main__':
     unittest.main()
