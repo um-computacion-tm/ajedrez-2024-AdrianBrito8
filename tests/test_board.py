@@ -129,5 +129,43 @@ class TestBoard(unittest.TestCase):
         with self.assertRaises(IndexError):
             self.board.remove_piece(0, 8)
 
+class TestBoardShow(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+
+    def test_initial_board(self):
+        expected_board = (
+            "8 R N B Q K B N R \n"
+            "7 P P P P P P P P \n"
+            "6 . . . . . . . . \n"
+            "5 . . . . . . . . \n"
+            "4 . . . . . . . . \n"
+            "3 . . . . . . . . \n"
+            "2 p p p p p p p p \n"
+            "1 r n b q k b n r \n"
+            "  a b c d e f g h\n"
+        )
+        self.assertEqual(self.board.show_board(), expected_board)
+
+    def test_board_after_move(self):
+        # Mover un peón blanco de e2 a e4
+        self.board.move_piece(6, 4, 4, 4)  # e2 -> e4
+        
+        expected_board_after_move = (
+            "8 R N B Q K B N R \n"
+            "7 P P P P P P P P \n"
+            "6 . . . . . . . . \n"
+            "5 . . . . . . . . \n"
+            "4 . . . . p . . . \n"
+            "3 . . . . . . . . \n"
+            "2 p p p p . p p p \n"
+            "1 r n b q k b n r \n"
+            "  a b c d e f g h\n"
+        )
+        self.assertEqual(self.board.show_board(), expected_board_after_move)
+
+if __name__ == '__main__':
+    unittest.main()
+
 if __name__ == '__main__':
     unittest.main()

@@ -108,3 +108,18 @@ class Board:
             self.__positions__[row][col] = None
         else:
             raise IndexError("Position out of board range.")
+        
+    def show_board(self):
+        board_str = ""
+        for row in range(8):
+            board_str += str(8 - row) + " "  # Mostrar números de fila de 8 a 1
+            for col in range(8):
+                piece = self.get_piece(row, col)
+                if piece is None:
+                    board_str += ". "  # Casilla vacía
+                else:
+                    board_str += str(piece) + " "
+            board_str += "\n"
+        
+        board_str += "  a b c d e f g h\n"  # Mostrar letras de columna de 'a' a 'h'
+        return board_str

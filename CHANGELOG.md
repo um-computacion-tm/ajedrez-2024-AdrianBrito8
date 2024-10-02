@@ -275,3 +275,14 @@
 - Modified the `move` method in the `Chess` class to check if the pawn has reached the opposite side of the board before promoting it.
 - Modified the `test_invalid_pawn_promotion_choice` test to expect a ValueError exception instead of an InvalidMove exception.
 - Modified the `move` method in the `Chess` class to check if the pawn has reached the opposite side of the board before checking the promotion choice.
+
+##[2024-10-01]
+## Improve:
+- Simplified the `show_board` method in the `Board` class to represent pieces with standard chess notation:
+
+    White pieces are represented with uppercase letters (R, N, B, Q, K, P).
+    Black pieces are represented with lowercase letters (r, n, b, q, k, p).
+
+- Improved user input validation in the `CLI` to guide players when incorrect formats are entered.
+- Enhanced `CLI` display for better readability of the current game state.
+
