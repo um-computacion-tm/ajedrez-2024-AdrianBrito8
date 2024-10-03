@@ -286,3 +286,8 @@
 - Improved user input validation in the `CLI` to guide players when incorrect formats are entered.
 - Enhanced `CLI` display for better readability of the current game state.
 
+##[2024-10-02]
+## Improve:
+- Improved `str` in all pieces.
+- Corrected piece representation in tests to match current implementation.
+- Updated `test_initial_board` and `test_board_after_move` tests to expect uppercase letters for white pieces and lowercase letters for black pieces.

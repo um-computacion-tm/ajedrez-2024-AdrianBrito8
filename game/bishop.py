@@ -6,7 +6,11 @@ class Bishop(Piece):
         self.position = position
     
     def __str__(self):
-        return f"B({self.get_color()[0]})"
+        if self.get_color() == "WHITE":
+            return "B"
+        else:
+            return "b"
+    
     
     def valid_moves(self, position, board=None):
         row, col = position

@@ -13,10 +13,10 @@ class TestQueen(unittest.TestCase):
     
     def test_queen_str(self):
         queen_white = Queen("WHITE")
-        self.assertEqual(str(queen_white), "Q(W)")
+        self.assertEqual(str(queen_white), "Q")
         
         queen_black = Queen("BLACK")
-        self.assertEqual(str(queen_black), "Q(B)")
+        self.assertEqual(str(queen_black), "q")
     
     def test_queen_valid_moves_center(self):
         queen = Queen("WHITE")

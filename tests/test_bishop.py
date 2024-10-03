@@ -13,10 +13,10 @@ class TestBishop(unittest.TestCase):
     
     def test_bishop_str(self):
         bishop_white = Bishop("WHITE")
-        self.assertEqual(str(bishop_white), "B(W)")
+        self.assertEqual(str(bishop_white), "B")
         
         bishop_black = Bishop("BLACK")
-        self.assertEqual(str(bishop_black), "B(B)")
+        self.assertEqual(str(bishop_black), "b")
     
     def test_bishop_valid_moves_center(self):
         bishop = Bishop("WHITE")

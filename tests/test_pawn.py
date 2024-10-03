@@ -8,6 +8,14 @@ from game.board import Board
 
 
 class TestPawn(unittest.TestCase):
+
+    def test_pawn_str(self):
+        pawn_white = Pawn("WHITE")
+        self.assertEqual(str(pawn_white), "P")
+        
+        pawn_black = Pawn("BLACK")
+        self.assertEqual(str(pawn_black), "p")
+
     def test_pawn_valid_moves(self):
         board = Board()
 

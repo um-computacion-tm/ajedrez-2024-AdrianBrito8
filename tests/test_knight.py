@@ -13,10 +13,10 @@ class TestKnight(unittest.TestCase):
 
     def test_knight_str(self):
         knight_white = Knight("WHITE")
-        self.assertEqual(str(knight_white), "N(W)")
+        self.assertEqual(str(knight_white), "N")
         
         knight_black = Knight("BLACK")
-        self.assertEqual(str(knight_black), "N(B)")
+        self.assertEqual(str(knight_black), "n")
 
     def test_knight_valid_moves(self):
         knight = Knight("BLACK", (4, 4))  # Set initial position

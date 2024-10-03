@@ -14,10 +14,10 @@ class TestRook(unittest.TestCase):
 
     def test_rook_str(self):
         rook_white = Rook("WHITE")
-        self.assertEqual(str(rook_white), "R(W)")
+        self.assertEqual(str(rook_white), "R")
         
         rook_black = Rook("BLACK")
-        self.assertEqual(str(rook_black), "R(B)")
+        self.assertEqual(str(rook_black), "r")
 
     def test_rook_valid_moves(self):
         rook = Rook("BLACK")

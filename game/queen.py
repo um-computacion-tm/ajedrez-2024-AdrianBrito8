@@ -9,7 +9,10 @@ class Queen(Piece):
         self.bishop = Bishop(color)
     
     def __str__(self):
-        return f"Q({self.get_color()[0]})"
+        if self.get_color() == "WHITE":
+            return "Q"
+        else:
+            return "q"
     
     def valid_moves(self, position, board=None):
         rook_moves = self.rook.valid_moves(position)

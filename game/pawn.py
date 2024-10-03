@@ -9,6 +9,12 @@ class Pawn(Piece):
         super().__init__(color)
         self.__moved__ = False  
         self.position = position
+    
+    def __str__(self):
+        if self.get_color() == "WHITE":
+            return "P"
+        else:
+            return "p"
 
     def valid_moves(self, position, board=None):
         row, col = position

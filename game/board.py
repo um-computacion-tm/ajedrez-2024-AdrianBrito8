@@ -108,7 +108,8 @@ class Board:
             self.__positions__[row][col] = None
         else:
             raise IndexError("Position out of board range.")
-        
+
+
     def show_board(self):
         board_str = ""
         for row in range(8):
@@ -118,8 +119,12 @@ class Board:
                 if piece is None:
                     board_str += ". "  # Casilla vacía
                 else:
-                    board_str += str(piece) + " "
+                    if piece.get_color() == "WHITE":
+                        board_str += str(piece).upper() + " "
+                    else:
+                        board_str += str(piece).lower() + " "
+
             board_str += "\n"
-        
+            
         board_str += "  a b c d e f g h\n"  # Mostrar letras de columna de 'a' a 'h'
         return board_str

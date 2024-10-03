@@ -10,8 +10,10 @@ class Knight:
         self.position = position
 
     def __str__(self):
-        color_initial = "W" if self.color == "WHITE" else "B"
-        return f"N({color_initial})"
+        if self.get_color() == "WHITE":
+            return "N"
+        else:
+            return "n"
 
     def valid_moves(self, position, board=None):
         row, col = position

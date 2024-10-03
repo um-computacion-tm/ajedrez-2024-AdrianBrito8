@@ -13,10 +13,10 @@ class TestKing(unittest.TestCase):
 
     def test_king_str(self):
         king_white = King("WHITE")
-        self.assertEqual(str(king_white), "K(W)")
+        self.assertEqual(str(king_white), "K")
         
         king_black = King("BLACK")
-        self.assertEqual(str(king_black), "K(B)")
+        self.assertEqual(str(king_black), "k")
 
     def test_king_valid_moves(self):
         king = King("BLACK")

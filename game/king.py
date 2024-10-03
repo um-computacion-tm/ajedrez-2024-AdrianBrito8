@@ -5,7 +5,10 @@ class King(Piece):
         super().__init__(color)
 
     def __str__(self):
-        return f"K({self.get_color()[0]})"
+        if self.get_color() == "WHITE":
+            return "K"
+        else:
+            return "k"
 
     def valid_moves(self, position, board=None):
         row, col = position

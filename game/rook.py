@@ -6,7 +6,11 @@ class Rook(Piece):
         self.position = position
 
     def __str__(self):
-        return f"R({self.get_color()[0]})"
+        if self.get_color() == "WHITE":
+
+            return "R"
+        else:
+            return "r"
 
     def valid_moves(self, position, board=None):
         row, col = position
