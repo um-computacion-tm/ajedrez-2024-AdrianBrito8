@@ -291,3 +291,11 @@
 - Improved `str` in all pieces.
 - Corrected piece representation in tests to match current implementation.
 - Updated `test_initial_board` and `test_board_after_move` tests to expect uppercase letters for white pieces and lowercase letters for black pieces.
+
+
+##[2024-10-03]
+## Added:
+- Added `get_king_position` method
+
+## Tests:
+- Added test case for `get_king_position` method to ensure it returns None when the king is not on the board.

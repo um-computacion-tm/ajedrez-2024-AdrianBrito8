@@ -128,3 +128,12 @@ class Board:
             
         board_str += "  a b c d e f g h\n"  # Mostrar letras de columna de 'a' a 'h'
         return board_str
+    
+    def get_king_position(self, color):
+        for row in range(8):
+            for col in range(8):
+                piece = self.get_piece(row, col)
+                if piece is not None and isinstance(piece, King) and piece.get_color() == color:
+                    return (row, col)
+
+        return None

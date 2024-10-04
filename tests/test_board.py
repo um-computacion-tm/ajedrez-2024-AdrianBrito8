@@ -168,5 +168,53 @@ class TestBoardShow(unittest.TestCase):
         )
         self.assertEqual(self.board.show_board(), expected_board_after_move)
 
+
+    def test_get_king_position(self):
+        # Crea un tablero vacío
+        board = Board()
+
+        # Elimina el rey negro de la posición (0, 4)
+
+        board.remove_piece(0, 4)
+
+        # Elimina el rey blanco de la posición (7, 4)
+
+        board.remove_piece(7, 4)
+
+        # Coloca un rey blanco en la posición (0, 0)
+
+        king_white = King("WHITE")
+
+        board.set_piece((0, 0), king_white)
+
+        # Verifica que la posición del rey blanco sea (0, 0)
+
+        self.assertEqual(board.get_king_position("WHITE"), (0, 0))
+
+        # Coloca un rey negro en la posición (5, 5)
+
+        king_black = King("BLACK")
+
+        board.set_piece((5, 5), king_black)
+        # Verifica que la posición del rey negro sea (5, 5)
+
+        self.assertEqual(board.get_king_position("BLACK"), (5, 5))
+        # Coloca un peón blanco en la posición (0, 0)
+
+        pawn_white = Pawn("WHITE")
+
+        board.set_piece((0, 0), pawn_white)
+
+        # Verifica que la posición del rey blanco sea None
+
+        self.assertIsNone(board.get_king_position("WHITE"))
+        
+        # Coloca un rey blanco en la posición (0, 0)
+        king_white = King("WHITE")
+
+        board.set_piece((0, 0), king_white)
+        # Verifica que la posición del rey blanco sea (0, 0)
+        self.assertEqual(board.get_king_position("WHITE"), (0, 0))
+
 if __name__ == '__main__':
     unittest.main()
