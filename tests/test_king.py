@@ -21,7 +21,7 @@ class TestKing(unittest.TestCase):
     def test_king_valid_moves(self):
         king = King("BLACK")
         board = Board()
-        moves = king.valid_moves((4, 4), board)
+        moves = king.valid_moves((4, 4), board, check_check=False)
 
         expected_moves = [
             (5, 4), (3, 4), (4, 5), (4, 3),
@@ -79,6 +79,30 @@ class TestKing(unittest.TestCase):
 
         self.assertIn((5, 5), king.valid_moves((4, 4), board))
 
+    def test_king_in_check(self):
+        board = Board()
+        king = King("WHITE")
+        board.place_piece(king, 4, 4)
+
+        # Colocar una torre negra que amenace al rey
+        rook = Rook("BLACK")
+        board.place_piece(rook, 4, 7)
+
+        # Verificar que el rey está en jaque
+        self.assertTrue(king.is_in_check((4, 4), board))
+
+    def test_king_valid_moves_avoid_check(self):
+        board = Board()
+        king = King("WHITE")
+        board.place_piece(king, 4, 4)
+
+        # Colocar una torre negra que amenace una de las posiciones válidas del rey
+        rook = Rook("BLACK")
+        board.place_piece(rook, 4, 6)
+
+        # Verificar los movimientos válidos del rey (no debería incluir (4, 5))
+        valid_moves = king.valid_moves((4, 4), board)
+        self.assertNotIn((4, 5), valid_moves)
 
 if __name__ == '__main__':
     unittest.main()

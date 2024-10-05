@@ -299,3 +299,12 @@
 
 ## Tests:
 - Added test case for `get_king_position` method to ensure it returns None when the king is not on the board.
+
+##[2024-10-04]
+## Added:
+- A new helper method, `is_in_check` was added.
+ This method checks whether a given position would be under attack by any enemy piece, thereby preventing the king from moving into such a position.
+
+## Improve:
+- The `valid_moves` method has been modified to include an optional check_check parameter.
+ This allows checking whether the move puts the king in check before adding it to the list of valid moves.
