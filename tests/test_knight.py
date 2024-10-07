@@ -76,5 +76,29 @@ class TestKnight(unittest.TestCase):
         # Test attack on an empty square (should not attack)
         self.assertFalse(knight.can_attack((5, 4), board))
 
+    def test_knight_can_jump_over_pieces(self):
+        board = Board()
+        knight = Knight("WHITE", (1, 1))
+        board.place_piece(knight, 1, 1)
+
+        friendly_piece = Rook("WHITE")
+        enemy_piece = Rook("BLACK")
+        board.place_piece(friendly_piece, 2, 2)  # Esta pieza no debe impedir el movimiento del caballo
+        board.place_piece(enemy_piece, 3, 2)     # Esta pieza tampoco debe impedir el movimiento
+
+        expected_moves = [
+
+            (3, 0), (3, 2), (2, 3), (0, 3)
+
+        ]
+        # Asegurarnos de que el caballo pueda saltar sobre las piezas y los movimientos sean correctos
+        self.assertCountEqual(knight.valid_moves((1, 1), board), expected_moves)
+
+    def test_knight_move(self):
+        knight = Knight("WHITE", (1, 1))
+        new_position = (3, 3)
+        knight.move(new_position)
+        self.assertEqual(knight.position, new_position)
+
 if __name__ == '__main__':
     unittest.main()

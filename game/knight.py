@@ -40,3 +40,6 @@ class Knight:
             target_piece = board.get_piece(*target_position)
             return target_piece is not None and target_piece.get_color() != self.color
         return False
+
+    def move(self, new_position):
+        self.set_position(new_position)

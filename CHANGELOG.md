@@ -308,3 +308,8 @@
 ## Improve:
 - The `valid_moves` method has been modified to include an optional check_check parameter.
  This allows checking whether the move puts the king in check before adding it to the list of valid moves.
+
+ ##[2024-10-06]
+ ## Added:
+ - Added test case for `test_knight_can_jump_over_pieces` to ensure the knight can jump over pieces on the board.
+- Added `move` method to the `Knight` class to handle movement of the knight on the board.
