@@ -313,3 +313,10 @@
  ## Added:
  - Added test case for `test_knight_can_jump_over_pieces` to ensure the knight can jump over pieces on the board.
 - Added `move` method to the `Knight` class to handle movement of the knight on the board.
+
+ ##[2024-10-07]
+ ## Added:
+ - Added a `move` method to handle the Queen's movement on the board: the method checks if the new position is valid using valid_moves. If valid, it moves the Queen to the new position and updates the board.
+
+## Tests:
+- Added a new test `test_queen_move` to verify that the Queen can move like a Rook and Bishop. The test ensures the Queen moves correctly on the board, updating its position.

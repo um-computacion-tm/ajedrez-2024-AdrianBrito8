@@ -108,5 +108,20 @@ class TestQueen(unittest.TestCase):
 
         self.assertFalse(queen.can_attack((5, 5), board))
 
+    def test_queen_move(self):
+        board = Board()
+        queen = Queen("WHITE", (4, 4))  # Establecer la posición inicial directamente
+        board.place_piece(queen, 4, 4)
+
+        # Verificar un movimiento válido
+        valid_move = queen.move((6, 4), board)  # Movimiento estilo torre
+        self.assertTrue(valid_move)
+        self.assertEqual(queen.position, (6, 4))
+
+        # Verificar un movimiento inválido
+        invalid_move = queen.move((7, 7), board)  # Movimiento no permitido
+        self.assertFalse(invalid_move)
+        self.assertEqual(queen.position, (6, 4))  # No debe haber cambiado la posición
+
 if __name__ == '__main__':
     unittest.main()
