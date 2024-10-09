@@ -320,3 +320,10 @@
 
 ## Tests:
 - Added a new test `test_queen_move` to verify that the Queen can move like a Rook and Bishop. The test ensures the Queen moves correctly on the board, updating its position.
+
+##[2024-10-08]
+## Added:
+- Added the `move` method to the `King` class, allowing the king to move to a new valid position on the board.
+
+## Tests:
+- Added a new test `test_king_move` to verify that the king can move correctly to a valid square.

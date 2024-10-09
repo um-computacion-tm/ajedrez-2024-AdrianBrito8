@@ -40,5 +40,19 @@ class King(Piece):
                         return True
         return False
     
+    def move(self, new_position, board):
+        if new_position in self.valid_moves(self.get_position(), board):
+            # Obtener la posición actual del rey
+            current_row, current_col = self.get_position()
+            new_row, new_col = new_position
+        
+            # Mover la pieza en el tablero descomponiendo la tupla en fila y columna
+            board.move_piece(current_row, current_col, new_row, new_col)
+        
+            # Actualizar la posición del rey
+            self.set_position(new_position)
+            return True
+        return False
+    
     def can_attack(self, position, board):
         return position in self.valid_moves(self.get_position(), board)

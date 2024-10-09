@@ -104,5 +104,19 @@ class TestKing(unittest.TestCase):
         valid_moves = king.valid_moves((4, 4), board)
         self.assertNotIn((4, 5), valid_moves)
 
+    def test_king_move(self):
+        board = Board()
+        king = King("WHITE")
+    
+        # Set the initial position for the king
+        king.set_position((4, 4))
+        board.place_piece(king, 4, 4)
+
+        # Test a valid move
+        self.assertTrue(king.move((5, 4), board))  # Moves down one square
+
+        # Test an invalid move (moving two squares)
+        self.assertFalse(king.move((7, 4), board))
+
 if __name__ == '__main__':
     unittest.main()
