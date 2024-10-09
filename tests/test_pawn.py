@@ -99,6 +99,19 @@ class TestPawn(unittest.TestCase):
         # No hay ninguna pieza en esta posición
         self.assertFalse(pawn_white.can_attack((5, 3), board))
 
+    def test_pawn_move(self):
+        pawn = Pawn("WHITE", (6, 4))
+    
+        # Asegurarse de que inicialmente el peón no se ha movido
+        self.assertFalse(pawn.__moved__)
+        self.assertEqual(pawn.position, (6, 4))
+    
+        # Mover el peón a una nueva posición
+        pawn.move((5, 4))
+    
+        # Verificar que la posición se actualizó y que __moved__ ahora es True
+        self.assertTrue(pawn.__moved__)
+        self.assertEqual(pawn.position, (5, 4))
 
 class TestPawnPromotion(unittest.TestCase):
     def test_pawn_promotion_to_queen(self):

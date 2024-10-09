@@ -327,3 +327,10 @@
 
 ## Tests:
 - Added a new test `test_king_move` to verify that the king can move correctly to a valid square.
+
+##[2024-10-09]
+## Added:
+- Added a new method `move` to update the pawn's position
+
+## Tests:
+- Added test `test_pawn_move` to verify the correct behavior of the move and ensures the pawn's position is updated correctly after the move
