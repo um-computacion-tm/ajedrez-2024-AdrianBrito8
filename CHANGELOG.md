@@ -334,3 +334,10 @@
 
 ## Tests:
 - Added test `test_pawn_move` to verify the correct behavior of the move and ensures the pawn's position is updated correctly after the move
+
+##[2024-10-10]
+## Added:
+- Added a new method `move` to update the rook's position
+
+## Tests:
+- Added test `test_rook_move` to verify the correct behavior of the move and ensures the rook's position is updated correctly after the move

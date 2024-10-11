@@ -57,6 +57,18 @@ class TestRook(unittest.TestCase):
         expected_moves = [(4, i) for i in range(8) if i != 4] + [(i, 4) for i in range(8) if i != 4]
         self.assertCountEqual(moves, expected_moves)
 
+    def test_rook_move(self):
+        board = Board()
+
+        rook = Rook("WHITE", (0, 0))
+        board.place_piece(rook, 0, 0)
+
+        # Mueve la torre a una nueva posición
+        rook.move((0, 5))
+
+        # Verifica que la nueva posición es correcta
+        self.assertEqual(rook.position, (0, 5))
+
     def test_rook_can_attack(self):
         board = Board()
 

@@ -27,6 +27,10 @@ class Rook(Piece):
                 moves.append((i, col))
 
         return moves
+    
+    def move(self, new_position):
+        """Actualiza la posición de la torre"""
+        self.position = new_position
 
     def can_attack(self, target_position, board):
         """
