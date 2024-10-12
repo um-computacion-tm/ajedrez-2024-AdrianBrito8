@@ -26,6 +26,10 @@ class Bishop(Piece):
             if row + i < 8 and col - i >= 0:
                 moves.append((row + i, col - i))
         return moves
+    
+    def move(self, new_position):
+        """Actualiza la posición del alfil"""
+        self.position = new_position
 
     
     def can_attack(self, target_position, board):

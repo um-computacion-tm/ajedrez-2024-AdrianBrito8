@@ -56,6 +56,18 @@ class TestBishop(unittest.TestCase):
         for move in invalid_moves:
             self.assertNotIn(move, valid_moves)
 
+    def test_bishop_move(self):
+        board = Board()
+
+        bishop = Bishop("WHITE", (0, 2))
+        board.place_piece(bishop, 0, 2)
+
+        # Mueve el alfil a una nueva posición
+        bishop.move((2, 4))
+
+        # Verifica que la nueva posición es correcta
+        self.assertEqual(bishop.position, (2, 4))
+
 
     def test_bishop_can_attack(self):
         board = Board()

@@ -341,3 +341,10 @@
 
 ## Tests:
 - Added test `test_rook_move` to verify the correct behavior of the move and ensures the rook's position is updated correctly after the move
+
+##[2024-10-11]
+## Added:
+- Added a new method `move` to update the bishop's position
+
+## Tests:
+- Added test `test_bishop_move` to verify the correct behavior of the move and ensures the bishop's position is updated correctly after the move
