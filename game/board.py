@@ -81,33 +81,35 @@ class Board:
         else:
             raise IndexError("Position out of board range.")
     
-    def place_piece(self, piece, row, col):
-        if self._in_bounds(row, col):
-            self.__positions__[row][col] = piece
-        else:
-            raise IndexError("Position out of board range.")
         
     def is_enemy_piece(self, piece, position):
         row, col = position
         target_piece = self.get_piece(row, col)
         return target_piece is not None and target_piece.get_color() != piece.get_color()
     
-    def set_piece(self, position, piece):
+    
+    def _in_bounds(self, row, col):
+        return 0 <= row < 8 and 0 <= col < 8
+
+    def update_position(self, position, piece=None):
+        """
+        Actualiza la posición en el tablero, ya sea para colocar o remover una pieza.
+        Si `piece` es `None`, se considera que se está removiendo la pieza.
+        """
         row, col = position
         if self._in_bounds(row, col):
             self.__positions__[row][col] = piece
         else:
             raise IndexError("Position out of board range.")
-    
-    def _in_bounds(self, row, col):
-        return 0 <= row < 8 and 0 <= col < 8
+
+    def place_piece(self, piece, row, col):
+        self.update_position((row, col), piece)
+
+    def set_piece(self, position, piece):
+        self.update_position(position, piece)
 
     def remove_piece(self, row, col):
-    # Remove the piece at the specified position from the board
-        if self._in_bounds(row, col):
-            self.__positions__[row][col] = None
-        else:
-            raise IndexError("Position out of board range.")
+        self.update_position((row, col), None)
 
 
     def show_board(self):

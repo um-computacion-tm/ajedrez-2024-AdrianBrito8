@@ -348,3 +348,8 @@
 
 ## Tests:
 - Added test `test_bishop_move` to verify the correct behavior of the move and ensures the bishop's position is updated correctly after the move
+
+##[2024-10-15]
+
+## Added:
+- Added a new method `update_position` on board to Fix issue and improve `place_piece`, `set_piece` and `remove_piece`
