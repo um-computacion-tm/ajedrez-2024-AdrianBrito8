@@ -1,7 +1,16 @@
 import unittest
 from game.piece import Piece
+from game.board import Board
 
 class TestPiece(unittest.TestCase):
+
+    def setUp(self):
+        self.board = Board()
+        self.white_piece = Piece('white')
+        self.black_piece = Piece('black')
+        # Cambiar la llamada a place_piece para pasar fila y columna por separado
+        self.board.place_piece(self.white_piece, 4, 4)
+
     def test_piece_color(self):
         piece = Piece("WHITE")
         self.assertEqual(piece.get_color(), "WHITE")
@@ -41,6 +50,19 @@ class TestPiece(unittest.TestCase):
         piece.capture()
         
         self.assertTrue(piece.is_captured())
+
+    def test_is_enemy_or_empty_with_enemy(self):
+        self.board.place_piece(self.black_piece, 5, 5)
+        result = self.white_piece.is_enemy_or_empty((5, 5), self.board)
+        self.assertTrue(result)
+
+    def test_is_enemy_or_empty_with_empty(self):
+        self.assertTrue(self.white_piece.is_enemy_or_empty((5, 5), self.board))
+
+    def test_is_enemy_or_empty_with_friendly(self):
+        self.board.place_piece(Piece('white'), 5, 5)
+        result = self.white_piece.is_enemy_or_empty((5, 5), self.board)
+        self.assertFalse(result)
 
 
 if __name__ == '__main__':

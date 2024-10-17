@@ -352,4 +352,9 @@
 ##[2024-10-15]
 
 ## Added:
-- Added a new method `update_position` on board to Fix issue and improve `place_piece`, `set_piece` and `remove_piece`
+- Added a new method `update_position` on `Board` to Fix issue and improve `place_piece`, `set_piece` and `remove_piece`
+
+##[2024-10-15]
+
+## Added:
+- Added a new method `is_enemy_or_empty` to the `Piece` class. This method checks if a given position on the board is either occupied by an enemy piece or empty, improving movement validation for chess pieces. Included in `Pawn` and `King` to fix an issue of similar code. (maybe i can implement `is_enemy_or_empty` in other pieces)

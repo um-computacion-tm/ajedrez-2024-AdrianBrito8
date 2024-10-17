@@ -21,11 +21,10 @@ class King(Piece):
         valid_moves = []
 
         for move in potential_moves:
-            if 0 <= move[0] < 8 and 0 <= move[1] < 8:
-                if board.is_empty_position(*move) or board.get_piece(*move).get_color() != self.get_color():
-                    # Verificar si el movimiento pone al rey en jaque (solo si check_check=True)
-                    if not check_check or not self.is_in_check(move, board):
-                        valid_moves.append(move)
+            if self.is_enemy_or_empty(move, board):
+                # Verificar si el movimiento pone al rey en jaque (solo si check_check=True)
+                if not check_check or not self.is_in_check(move, board):
+                    valid_moves.append(move)
 
         return valid_moves
     

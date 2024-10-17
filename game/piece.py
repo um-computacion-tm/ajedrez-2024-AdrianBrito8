@@ -28,3 +28,12 @@ class Piece:
 
     def capture(self):
         self.__captured__ = True
+
+    def is_enemy_or_empty(self, position, board):
+        """Verifica si la posición está vacía o contiene una pieza enemiga."""
+        row, col = position
+        if 0 <= row < 8 and 0 <= col < 8:  # Verifica los límites del tablero
+            piece = board.get_piece(row, col)
+            if piece is None or self.is_opponent_piece(piece):
+                return True
+        return False
