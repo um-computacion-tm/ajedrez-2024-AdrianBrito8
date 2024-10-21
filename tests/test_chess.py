@@ -91,5 +91,29 @@ class TestChess(unittest.TestCase):
         with self.assertRaises(InvalidMove):
             self.game.move(6, 0, 5, 1)  # Movimiento inválido, no se puede atacar a una pieza amiga
 
+    def test_game_over_no_pieces(self):
+
+        # Remove all pieces from the board
+
+        for row in range(8):
+
+            for col in range(8):
+
+                self.game.board.remove_piece(row, col)
+
+
+        # Now check if the game is over
+
+        self.game.check_game_over()  # Call check_game_over directly
+
+        self.assertTrue(self.game.is_game_over)
+
+    def test_agree_to_draw(self):
+        # Simular un acuerdo de empate
+        self.game.agree_to_draw()
+        self.assertTrue(self.game.is_game_over)
+
+
+
 if __name__ == '__main__':
     unittest.main()

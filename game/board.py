@@ -8,43 +8,44 @@ from game.exceptions import InvalidMove, InvalidTurn, EmptyPosition
 
 class Board:
     def __init__(self):
-        # Inicializa el tablero con posiciones vacías
+        # Initialize the board with empty positions
         self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
         self.setup_initial_pieces()
         self.current_turn = "WHITE"
 
     def setup_initial_pieces(self):
-        # Coloca peones
+        # Place pawns
         for col in range(8):
             self.__positions__[1][col] = Pawn("BLACK")
             self.__positions__[6][col] = Pawn("WHITE")
     
-        # Coloca torres
+        # Place rooks
         self.__positions__[0][0] = Rook("BLACK")
         self.__positions__[0][7] = Rook("BLACK")
         self.__positions__[7][0] = Rook("WHITE")
         self.__positions__[7][7] = Rook("WHITE")
 
-        # Coloca caballos
+        # Place knights
         self.__positions__[0][1] = Knight("BLACK")
         self.__positions__[0][6] = Knight("BLACK")
         self.__positions__[7][1] = Knight("WHITE")
         self.__positions__[7][6] = Knight("WHITE")
 
-        # Coloca alfiles
+        # Place bishops
         self.__positions__[0][2] = Bishop("BLACK")
         self.__positions__[0][5] = Bishop("BLACK")
         self.__positions__[7][2] = Bishop("WHITE")
         self.__positions__[7][5] = Bishop("WHITE")
 
-        # Coloca reinas
+        # Place queens
         self.__positions__[0][3] = Queen("BLACK")
         self.__positions__[7][3] = Queen("WHITE")
 
-        # Coloca reyes
+        # Place kings
         self.__positions__[0][4] = King("BLACK")
         self.__positions__[7][4] = King("WHITE")
-    
+
+
     def get_piece(self, row, col):
         if 0 <= row < 8 and 0 <= col < 8:
             return self.__positions__[row][col]
@@ -55,24 +56,24 @@ class Board:
         if not self._in_bounds(start_row, start_col) or not self._in_bounds(end_row, end_col):
             raise IndexError("Move out of board range.")
 
-        piece = self.__positions__[start_row][start_col]
+        piece = self.get_piece(start_row, start_col)
         if piece is None:
             raise EmptyPosition("No piece at the source position.")
 
-        # Verificar si es el turno correcto
+        # Check if it's the correct turn
         if piece.get_color() != self.current_turn:
             raise InvalidTurn("It's not your turn.")
 
-        # Verificar si el movimiento es válido para la pieza
+        # Check if the move is valid for the piece
         valid_moves = piece.valid_moves((start_row, start_col), self)
         if (end_row, end_col) not in valid_moves:
             raise InvalidMove("Invalid move for the piece.")
 
-        # Realizar el movimiento
+        # Perform the move
         self.__positions__[start_row][start_col] = None
         self.__positions__[end_row][end_col] = piece
 
-        # Cambiar el turno
+        # Change the turn
         self.current_turn = "WHITE" if self.current_turn == "BLACK" else "BLACK"
 
     def is_empty_position(self, row, col):
@@ -81,21 +82,15 @@ class Board:
         else:
             raise IndexError("Position out of board range.")
     
-        
     def is_enemy_piece(self, piece, position):
         row, col = position
         target_piece = self.get_piece(row, col)
         return target_piece is not None and target_piece.get_color() != piece.get_color()
     
-    
     def _in_bounds(self, row, col):
         return 0 <= row < 8 and 0 <= col < 8
 
     def update_position(self, position, piece=None):
-        """
-        Actualiza la posición en el tablero, ya sea para colocar o remover una pieza.
-        Si `piece` es `None`, se considera que se está removiendo la pieza.
-        """
         row, col = position
         if self._in_bounds(row, col):
             self.__positions__[row][col] = piece
@@ -111,15 +106,17 @@ class Board:
     def remove_piece(self, row, col):
         self.update_position((row, col), None)
 
+    def get_pieces(self, color):
+        return [piece for row in self.__positions__ for piece in row if piece is not None and piece.get_color() == color]
 
     def show_board(self):
         board_str = ""
         for row in range(8):
-            board_str += str(8 - row) + " "  # Mostrar números de fila de 8 a 1
+            board_str += str(8 - row) + " "  # Show row numbers from 8 to 1
             for col in range(8):
                 piece = self.get_piece(row, col)
                 if piece is None:
-                    board_str += ". "  # Casilla vacía
+                    board_str += ". "  # Empty square
                 else:
                     if piece.get_color() == "WHITE":
                         board_str += str(piece).upper() + " "
@@ -128,14 +125,16 @@ class Board:
 
             board_str += "\n"
             
-        board_str += "  a b c d e f g h\n"  # Mostrar letras de columna de 'a' a 'h'
+        board_str += "  a b c d e f g h\n"  # Show column letters from 'a' to 'h'
         return board_str
-    
+
+
     def get_king_position(self, color):
         for row in range(8):
             for col in range(8):
                 piece = self.get_piece(row, col)
                 if piece is not None and isinstance(piece, King) and piece.get_color() == color:
                     return (row, col)
+
 
         return None

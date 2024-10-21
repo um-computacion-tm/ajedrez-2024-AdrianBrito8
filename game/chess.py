@@ -10,8 +10,12 @@ class Chess:
     def __init__(self):
         self.board = Board()
         self.current_turn = "WHITE"  # Comienza con el turno de las piezas blancas
+        self.is_game_over = False  # Indica si el juego ha terminado
 
     def move(self, start_row, start_col, end_row, end_col, promotion_choice=None):
+        if self.is_game_over:
+            raise Exception("The game is over. No further moves can be made.")
+
         # Verifica el turno actual
         piece = self.board.get_piece(start_row, start_col)
         if piece is None:
@@ -33,6 +37,9 @@ class Chess:
         else:
             # Mueve la pieza
             self.board.move_piece(start_row, start_col, end_row, end_col)
+
+        # Verifica si el juego ha terminado
+        self.check_game_over()
     
         # Cambia el turno
         self.current_turn = "WHITE" if self.current_turn == "BLACK" else "BLACK"
@@ -66,3 +73,22 @@ class Chess:
             self.board.place_piece(Bishop(color), end_row, end_col)
         elif promotion_choice == "knight":
             self.board.place_piece(Knight(color), end_row, end_col)
+
+    def check_game_over(self):
+
+        # Check if there are any pieces left for both players
+
+        white_pieces = self.board.get_pieces("WHITE")
+
+        black_pieces = self.board.get_pieces("BLACK")
+
+
+        if not white_pieces and not black_pieces:
+
+            self.is_game_over = True
+
+    def agree_to_draw(self):
+        """Permite a los jugadores acordar un empate."""
+        self.is_game_over = True
+        print("Game over! The game has ended in a draw by mutual agreement.")
+
