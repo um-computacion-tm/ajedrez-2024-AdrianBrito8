@@ -364,3 +364,6 @@
 ## Final
 - Improve cli for the final commit
 - Little improve board and chess for final commit
+
+
+(TTHERE IS A BIG PROBLEM, THE PIECES GET CROSSED EACH OTHER) this not ended yet.
