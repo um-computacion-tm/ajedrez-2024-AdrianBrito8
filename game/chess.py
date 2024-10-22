@@ -11,6 +11,7 @@ class Chess:
         self.board = Board()
         self.current_turn = "WHITE"  # Comienza con el turno de las piezas blancas
         self.is_game_over = False  # Indica si el juego ha terminado
+        self.winner = None  # Para almacenar el ganador del juego
 
     def move(self, start_row, start_col, end_row, end_col, promotion_choice=None):
         if self.is_game_over:
@@ -41,8 +42,9 @@ class Chess:
         # Verifica si el juego ha terminado
         self.check_game_over()
     
-        # Cambia el turno
-        self.current_turn = "WHITE" if self.current_turn == "BLACK" else "BLACK"
+        # Cambia el turno si el juego no ha terminado
+        if not self.is_game_over:
+            self.current_turn = "WHITE" if self.current_turn == "BLACK" else "BLACK"
 
     def is_valid_move(self, start_row, start_col, end_row, end_col):
         piece = self.board.get_piece(start_row, start_col)
@@ -69,7 +71,7 @@ class Chess:
 
         # Coloca la nueva pieza en la posición de promoción
         if promotion_choice == "queen":
-            self.board.place_piece(Queen(color), end_row, end_col)
+            self.board.place_piece(Queen(color), end_row , end_col)
         elif promotion_choice == "rook":
             self.board.place_piece(Rook(color), end_row, end_col)
         elif promotion_choice == "bishop":
@@ -78,20 +80,20 @@ class Chess:
             self.board.place_piece(Knight(color), end_row, end_col)
 
     def check_game_over(self):
-
-        # Check if there are any pieces left for both players
-
         white_pieces = self.board.get_pieces("WHITE")
-
         black_pieces = self.board.get_pieces("BLACK")
 
-
-        if not white_pieces and not black_pieces:
-
+        if not white_pieces:
             self.is_game_over = True
+            self.winner = "BLACK"
+            print("Black wins! White has no pieces left.")
+        elif not black_pieces:
+            self.is_game_over = True
+            self.winner = "WHITE"
+            print("White wins! Black has no pieces left.")
 
     def agree_to_draw(self):
         """Permite a los jugadores acordar un empate."""
         self.is_game_over = True
+        self.winner = "DRAW"
         print("Game over! The game has ended in a draw by mutual agreement.")
-

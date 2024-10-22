@@ -376,3 +376,12 @@
 
 
 - Fixing some issues in CLI when u accept the `draw`  option it enters to a infinite loop.
+- Simplified the main game loop in the 'main' function.
+- Added 'print_game_result' function to display the final game outcome.
+- Modified 'play' function to handle game-ending conditions more effectively.
+- Updated 'handle_draw_offer' to set game over state when a draw is agreed upon.
+
+Modified the `Chess` class:
+- Added 'winner' attribute to store the game outcome.
+- Updated 'check_game_over' method to determine the winner when a player has no pieces.
+- Modified 'agree_to_draw' method to set the winner as "DRAW".
