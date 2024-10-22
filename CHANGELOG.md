@@ -371,3 +371,5 @@
 ##[2024-10-22]
 ## Added:
 - Added a new mwthof in `Board` `path_is_clear`  to check if a path is clear for a piece to move to a new position (i hope to  fix the problem of pieces crossing each other).
+
+- Now implemented in `chess` and works all good.

@@ -46,12 +46,15 @@ class Chess:
 
     def is_valid_move(self, start_row, start_col, end_row, end_col):
         piece = self.board.get_piece(start_row, start_col)
-    
         if piece is None:
             return False
 
         valid_moves = piece.valid_moves((start_row, start_col), self.board)
-    
+        # Check if the path is clear (for pieces that need it)
+        if isinstance(piece, (Queen, Rook, Bishop)):
+            if not self.board.path_is_clear((start_row, start_col), (end_row, end_col)):
+                return False
+
         # Revisar si el movimiento está en la lista de movimientos válidos
         if isinstance(piece, Pawn) and (end_row == 0 or end_row == 7):
             # Allow pawns to move to the opposite side of the board
