@@ -7,8 +7,10 @@ def main():
     chess = Chess()
     move_history = []  # To store the history of moves
 
-    while True:
+    while not chess.is_game_over:
         play(chess, move_history)
+
+    print("¡El juego ha terminado!")
 
 def play(chess, move_history):
     try:
@@ -18,14 +20,21 @@ def play(chess, move_history):
 
         # Check if the game is over before asking for input
         if chess.is_game_over:
-            print("¡El juego ha terminado!")
-            return
+            return False
 
-        # Pedir el movimiento en notación algebraica
-        move = input("Ingrese su movimiento (ej: e2-e4) o 'salir' para terminar: ").strip().lower()
+        # Pedir el movimiento en notación algebraica o la opción de ofrecer tablas
+        move = input("Ingrese su movimiento (ej: e2-e4), 'draw' para ofrecer tablas, o 'salir' para terminar: ").strip().lower()
+        
         if move == 'salir':
             print("Juego terminado.")
-            exit()
+            chess.is_game_over = True
+            return False
+        elif move == 'draw':
+            if offer_draw(chess):
+                return False
+            else:
+                print("Draw offer declined. The game continues.")
+                return True
 
         # Validar el movimiento
         from_pos, to_pos = parse_move(move)
@@ -45,10 +54,7 @@ def play(chess, move_history):
         # Add the move to history
         move_history.append(move)
 
-        # Check for game over after the move
-        if chess.is_game_over:
-            print("¡El juego ha terminado!")
-            return
+        return True
 
     except EmptyPosition:
         print("Error: La posición inicial está vacía.")
@@ -61,6 +67,16 @@ def play(chess, move_history):
     except Exception as e:
         print("Error inesperado:", e)
 
+    return True
+
+
+def offer_draw(chess):
+    other_player = "BLACK" if chess.current_turn == "WHITE" else "WHITE"
+    accept = input(f"{other_player}, do you accept the draw offer? (y/n): ").strip().lower()
+    if accept == 'y':
+        chess.agree_to_draw()
+        return True
+    return False
 
 def parse_move(move):
     try:

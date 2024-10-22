@@ -373,3 +373,6 @@
 - Added a new mwthof in `Board` `path_is_clear`  to check if a path is clear for a piece to move to a new position (i hope to  fix the problem of pieces crossing each other).
 
 - Now implemented in `chess` and works all good.
+
+
+- Fixing some issues in CLI when u accept the `draw`  option it enters to a infinite loop.
