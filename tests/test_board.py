@@ -182,51 +182,42 @@ class TestBoardShow(unittest.TestCase):
 class TestBoardPathIsClear(unittest.TestCase):
     def setUp(self):
         self.board = Board()
-        # Clear any existing pieces to avoid interference
-        for row in range(8):
-            for col in range(8):
-                self.board.remove_piece(row, col)
+        self.board.setup_initial_pieces()
 
     def test_path_is_clear_horizontal(self):
-        # Clear path from (7, 0) to (7, 3)
-        self.assertTrue(self.board.path_is_clear((7, 0), (7, 3)))
-        # Place a piece at (7, 1) to block the path
-        self.board.place_piece(Rook("WHITE"), 7, 1)
-        self.assertFalse(self.board.path_is_clear((7, 0), (7, 3)))
-
-        # Remove the blocking piece and check again
-        self.board.remove_piece(7, 1)
-        self.assertTrue(self.board.path_is_clear((7, 0), (7, 3)))
+        # Clear path from (7, 0) to (7, 1) (should be clear)
+        self.assertTrue(self.board.path_is_clear((7, 0), (7, 1)))
+        
+        # Blocked path from (7, 0) to (7, 2) (knight at 7, 1)
+        self.assertFalse(self.board.path_is_clear((7, 0), (7, 2)))
 
     def test_path_is_clear_vertical(self):
-        # Clear path from (6, 0) to (1, 0)
-        self.assertTrue(self.board.path_is_clear((6, 0), (1, 0)))
+        # Clear path from (6, 0) to (5, 0) (should be clear)
+        self.assertTrue(self.board.path_is_clear((6, 0), (5, 0)))
 
-        # Place a piece at (5, 0) to block the path
-        self.board.place_piece(Rook("WHITE"), 5, 0)
-        self.assertFalse(self.board.path_is_clear((6, 0), (1, 0)))
-
-        # Remove the blocking piece and check again
-        self.board.remove_piece(5, 0)
-        self.assertTrue(self.board.path_is_clear((6, 0), (1, 0)))
+        # Blocked path from (7, 0) to (5, 0) (pawn at 6, 0)
+        self.assertFalse(self.board.path_is_clear((7, 0), (5, 0)))
 
     def test_path_is_clear_diagonal(self):
-        # Check that the method returns False for diagonal moves
+        # This should fail because there's a pawn at (6, 1)
         self.assertFalse(self.board.path_is_clear((7, 0), (5, 2)))
 
-    def test_path_is_clear_with_edge_of_board(self):
-        # Test with edges of the board
-        self.assertTrue(self.board.path_is_clear((7, 0), (7, 7)))  # Clear path horizontally
-        self.assertTrue(self.board.path_is_clear((0, 0), (7, 0)))  # Clear path vertically
+        # This should be clear (from white bishop to empty square)
+        self.assertTrue(self.board.path_is_clear((7, 2), (6, 3)))
 
-        # Block the path with a piece at (3, 0)
-        self.board.place_piece(Rook("WHITE"), 3, 0)
-        self.assertFalse(self.board.path_is_clear((0, 0), (7, 0)))  # Now the path is blocked
+    def test_path_is_clear_with_edge_of_board(self):
+        # Test with edges of the board (blocked by pieces)
+        self.assertFalse(self.board.path_is_clear((7, 0), (7, 7)))  # Blocked horizontally
+        self.assertFalse(self.board.path_is_clear((0, 0), (7, 0)))  # Blocked vertically
+
+        # Clear path along edge
+        self.assertTrue(self.board.path_is_clear((2, 0), (5, 0)))  # Clear vertically along edge
 
     def test_path_is_clear_empty_path(self):
         # Check an empty path
-        self.assertTrue(self.board.path_is_clear((4, 4), (4, 7)))  # Horizontal
-        self.assertTrue(self.board.path_is_clear((4, 4), (1, 4)))  # Vertical
+        self.assertTrue(self.board.path_is_clear((3, 3), (3, 5)))  # Horizontal
+        self.assertTrue(self.board.path_is_clear((3, 3), (5, 3)))  # Vertical
+        self.assertTrue(self.board.path_is_clear((3, 3), (5, 5)))  # Diagonal
 
 if __name__ == '__main__':
     unittest.main()

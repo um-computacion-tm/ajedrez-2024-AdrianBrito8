@@ -69,6 +69,13 @@ class Board:
         if (end_row, end_col) not in valid_moves:
             raise InvalidMove("Invalid move for the piece.")
 
+        # Check if the path is clear
+        if not self.path_is_clear((start_row, start_col), (end_row, end_col)):
+            # Allow capturing a piece at the destination
+            target_piece = self.get_piece(end_row, end_col)
+            if target_piece is not None and target_piece.get_color() == piece.get_color():
+                raise InvalidMove("Path is not clear for this move.")
+
         # Perform the move
         self.__positions__[start_row][start_col] = None
         self.__positions__[end_row][end_col] = piece
@@ -129,27 +136,22 @@ class Board:
         return board_str
     
     def path_is_clear(self, start, end):
-        """Verifica si el camino de start a end está libre de obstrucciones."""
+        """Check if the path from start to end is clear of obstructions."""
         row_start, col_start = start
         row_end, col_end = end
 
-        # Movimiento en la misma fila (horizontal)
-        if row_start == row_end:
-            step = 1 if col_end > col_start else -1
-            for col in range(col_start + step, col_end, step):
-                if self.get_piece(row_start, col) is not None:
-                    return False
-            return True
-        
-        # Movimiento en la misma columna (vertical)
-        elif col_start == col_end:
-            step = 1 if row_end > row_start else -1
-            for row in range(row_start + step, row_end, step):
-                if self.get_piece(row, col_start) is not None:
-                    return False
-            return True
+        row_step = 0 if row_end == row_start else (1 if row_end > row_start else -1)
+        col_step = 0 if col_end == col_start else (1 if col_end > col_start else -1)
 
-        return False
+        row, col = row_start + row_step, col_start + col_step
+
+        while (row, col) != (row_end, col_end):
+            if self.get_piece(row, col) is not None:
+                return False
+            row += row_step
+            col += col_step
+
+        return True
 
 
     def get_king_position(self, color):
