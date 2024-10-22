@@ -179,5 +179,54 @@ class TestBoardShow(unittest.TestCase):
         # Verify the white king's position is (0, 0)
         self.assertEqual(board.get_king_position("WHITE"), (0, 0))
 
+class TestBoardPathIsClear(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+        # Clear any existing pieces to avoid interference
+        for row in range(8):
+            for col in range(8):
+                self.board.remove_piece(row, col)
+
+    def test_path_is_clear_horizontal(self):
+        # Clear path from (7, 0) to (7, 3)
+        self.assertTrue(self.board.path_is_clear((7, 0), (7, 3)))
+        # Place a piece at (7, 1) to block the path
+        self.board.place_piece(Rook("WHITE"), 7, 1)
+        self.assertFalse(self.board.path_is_clear((7, 0), (7, 3)))
+
+        # Remove the blocking piece and check again
+        self.board.remove_piece(7, 1)
+        self.assertTrue(self.board.path_is_clear((7, 0), (7, 3)))
+
+    def test_path_is_clear_vertical(self):
+        # Clear path from (6, 0) to (1, 0)
+        self.assertTrue(self.board.path_is_clear((6, 0), (1, 0)))
+
+        # Place a piece at (5, 0) to block the path
+        self.board.place_piece(Rook("WHITE"), 5, 0)
+        self.assertFalse(self.board.path_is_clear((6, 0), (1, 0)))
+
+        # Remove the blocking piece and check again
+        self.board.remove_piece(5, 0)
+        self.assertTrue(self.board.path_is_clear((6, 0), (1, 0)))
+
+    def test_path_is_clear_diagonal(self):
+        # Check that the method returns False for diagonal moves
+        self.assertFalse(self.board.path_is_clear((7, 0), (5, 2)))
+
+    def test_path_is_clear_with_edge_of_board(self):
+        # Test with edges of the board
+        self.assertTrue(self.board.path_is_clear((7, 0), (7, 7)))  # Clear path horizontally
+        self.assertTrue(self.board.path_is_clear((0, 0), (7, 0)))  # Clear path vertically
+
+        # Block the path with a piece at (3, 0)
+        self.board.place_piece(Rook("WHITE"), 3, 0)
+        self.assertFalse(self.board.path_is_clear((0, 0), (7, 0)))  # Now the path is blocked
+
+    def test_path_is_clear_empty_path(self):
+        # Check an empty path
+        self.assertTrue(self.board.path_is_clear((4, 4), (4, 7)))  # Horizontal
+        self.assertTrue(self.board.path_is_clear((4, 4), (1, 4)))  # Vertical
+
 if __name__ == '__main__':
     unittest.main()

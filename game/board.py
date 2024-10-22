@@ -127,6 +127,29 @@ class Board:
             
         board_str += "  a b c d e f g h\n"  # Show column letters from 'a' to 'h'
         return board_str
+    
+    def path_is_clear(self, start, end):
+        """Verifica si el camino de start a end está libre de obstrucciones."""
+        row_start, col_start = start
+        row_end, col_end = end
+
+        # Movimiento en la misma fila (horizontal)
+        if row_start == row_end:
+            step = 1 if col_end > col_start else -1
+            for col in range(col_start + step, col_end, step):
+                if self.get_piece(row_start, col) is not None:
+                    return False
+            return True
+        
+        # Movimiento en la misma columna (vertical)
+        elif col_start == col_end:
+            step = 1 if row_end > row_start else -1
+            for row in range(row_start + step, row_end, step):
+                if self.get_piece(row, col_start) is not None:
+                    return False
+            return True
+
+        return False
 
 
     def get_king_position(self, color):
